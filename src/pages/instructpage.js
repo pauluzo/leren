@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import{beginUpload} from "../services/CloudinaryService";
+import{getRequest} from "../services/JsonService";
 import {TopNav} from "../components/Reusable";
 import {ReactComponent as CourseIcon1} from "../assets/icons/course1-icon.svg";
 import {ReactComponent as CourseIcon2} from "../assets/icons/course2-icon.svg";
@@ -47,7 +48,7 @@ function InstructorPage() {
                 <input className="upload-button"
                   onClick={(e) => {
                     e.preventDefault();
-                    beginUpload("video");
+                    getRequest("gmail");
                   }}
                   type="button"
                   value="Upload Video"

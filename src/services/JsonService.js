@@ -1,5 +1,5 @@
 const axios = require("axios");
-var url = 'http://localhost:3001/users';
+var url = "https://personal-json-server.herokuapp.com/users";
 
 export const getRequest = (searchQuery) => {
   let myUrl = url;
@@ -9,9 +9,7 @@ export const getRequest = (searchQuery) => {
   axios.get(myUrl)
   .then(resp => {
     let data = resp.data;
-    data.forEach(e => {
-      console.log(`${e.first_name}, ${e.last_name}, ${e.email}`);
-    });
+    console.log(data);
   })
   .catch(error => {
     console.log(error);
