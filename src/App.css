@@ -1,38 +1,283 @@
-.App {
-  text-align: center;
+.material-container, .course-container, .subject-card {
+  -webkit-box-shadow: 10px 11px 5px -4px #bec9d1;
+  -moz-box-shadow: 10px 11px 5px -4px #bec9d1;
+  box-shadow: 10px 11px 5px -4px #bec9d1;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.course-container .course-form .form-body div .upload-button, .intro-left div button, .instructor-button, .signup-button, .login-button {
+  padding: 7px 20px;
+  border-radius: 20px;
+  cursor: pointer;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.course-container .course-form .form-body div .upload-button, .intro-left div button {
+  border-radius: 10px;
+  background-color: #3131bd;
+  color: white;
+  border-width: 0px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.intro-right, .intro-left {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  margin: 0px 5%;
+  height: 100%;
+}
+
+.homepage {
+  background-color: #e2e0e0;
+}
+
+.login-button {
+  background-color: white;
+  color: #3131bd;
+}
+
+.signup-button {
+  background-color: #3131bd;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.instructor-button {
+  border-radius: 0px;
+  color: #3131bd;
+  background-color: transparent;
+  border: none;
+  font-weight: 700;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.topnav {
+  position: fixed;
+  display: flex;
+  height: 3em;
+  width: -webkit-fill-available;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 15px;
+  border-bottom: 1px solid grey;
+  background-color: #e2e0e0;
 }
+
+.float-right {
+  display: flex;
+}
+.float-right div {
+  padding: 0px 5px;
+  font-size: 0.8em;
+}
+
+.header {
+  background-image: url(./assets/images/header-image.png);
+  height: 300px;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 3em;
+}
+
+.header-details {
+  margin: 0px 50px;
+  color: white;
+  font-family: sans-serif;
+}
+.header-details h1 {
+  font-size: 3em;
+}
+.header-details h4 {
+  font-size: 1.2em;
+  max-width: 700px;
+  line-height: 2em;
+}
+
+.home-intro {
+  display: flex;
+  justify-content: space-between;
+  height: 250px;
+  margin: 10px 0px;
+  padding: 10px 0px;
+  background-color: white;
+}
+
+.intro-left img {
+  width: 12rem;
+  height: 12rem;
+}
+.intro-left div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 20px;
+  height: 100%;
+}
+.intro-left div button {
+  margin: 20px 0px;
+}
+.intro-left div span {
+  margin: 20px 0px;
+  font-weight: bold;
+}
+
+.intro-right {
+  max-width: 40%;
+  font-weight: 500;
+  line-height: 1.5em;
+}
+
+.category-container {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0px;
+  padding: 10px 5%;
+  background-color: white;
+}
+.category-container span {
+  font-weight: 600;
+  color: #1263f8;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.subject-card {
+  margin: 20px 30px 20px 0px;
+  width: 200px;
+  height: 50px;
+  border: 2px solid #1263f8;
+  border-radius: 15px;
+  display: flex;
+  padding: 10px 20px;
+  background-color: white;
+  align-items: center;
+}
+.subject-card span {
+  padding-left: 20px;
+  font-weight: 600;
+  color: #1263f8;
+}
+
+.footer_outer_container {
+  display: flex;
+  align-items: center;
+  height: 120px;
+  padding: 0px 5%;
+  background-color: white;
+}
+.footer_outer_container .logo-icon {
+  flex: 3;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.footer_inner_container {
+  flex: 7;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.footer_inner_container img {
+  width: 35px;
+  height: 35px;
+  padding: 5px 15px;
+  margin: 10px 10px;
+}
+.footer_inner_container .copyright {
+  font-size: 12px;
+  color: #1263f8;
+}
+
+.instructor-body {
+  display: flex;
+  background-color: white;
+  padding: 50px 5%;
+  padding-top: 100px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.course-container {
+  border: 1px solid gainsboro;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.course-container .course-intro {
+  padding: 0px 20px;
+  color: #131111;
+  border-bottom: 1px solid gainsboro;
+}
+.course-container .course-form {
+  padding: 0px 20px;
+}
+.course-container .course-form .form-body {
+  padding: 20px 0px;
+  color: #131111;
+}
+.course-container .course-form .form-body div {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+}
+.course-container .course-form .form-body div label {
+  padding-bottom: 5px;
+  font-weight: 500;
+}
+.course-container .course-form .form-body div input {
+  min-height: 1.5em;
+}
+.course-container .course-form .form-body div .upload-button {
+  max-width: 10em;
+}
+.course-container .course-form .form-body div textarea {
+  height: 5em;
+}
+.course-container .course-form .form-body div .input-style {
+  max-width: 400px;
+  border-radius: 5px;
+  padding-left: 5px;
+  background-color: gainsboro;
+}
+
+.resources-container {
+  padding: 10px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.material-container {
+  width: -webkit-fill-available;
+  display: flex;
+  height: 200px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 20px;
+  border: 1px solid gainsboro;
+  border-radius: 20px;
+  margin-bottom: 2em;
+}
+.material-container .material-message {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 70%;
+  max-width: 500px;
+}
+.material-container .material-message p {
+  margin-top: 0px;
+}
+.material-container .material-icon {
+  width: 30%;
+  min-width: 200px;
+  display: flex;
+  justify-content: center;
+}
+
+/*# sourceMappingURL=App.css.map */
