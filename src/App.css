@@ -4,13 +4,13 @@
   box-shadow: 10px 11px 5px -4px #bec9d1;
 }
 
-.course-container .course-form .form-body div .upload-button, .intro-left div button, .instructor-button, .signup-button, .login-button {
+.form-body div .upload-button, .intro-left div button, .nav-btn3, .nav-btn2, .nav-btn1 {
   padding: 7px 20px;
   border-radius: 20px;
   cursor: pointer;
 }
 
-.course-container .course-form .form-body div .upload-button, .intro-left div button {
+.form-body div .upload-button, .intro-left div button {
   border-radius: 10px;
   background-color: #3131bd;
   color: white;
@@ -28,17 +28,17 @@
   background-color: #e2e0e0;
 }
 
-.login-button {
-  background-color: white;
-  color: #3131bd;
-}
-
-.signup-button {
+.nav-btn1 {
   background-color: #3131bd;
   color: white;
 }
 
-.instructor-button {
+.nav-btn2 {
+  background-color: white;
+  color: #3131bd;
+}
+
+.nav-btn3 {
   border-radius: 0px;
   color: #3131bd;
   background-color: transparent;
@@ -56,6 +56,87 @@
   padding: 0px 15px;
   border-bottom: 1px solid grey;
   background-color: #e2e0e0;
+}
+
+.dropdown-container {
+  margin-top: 3em;
+  background-color: white;
+  color: black;
+  width: 60%;
+  min-width: 400px;
+  max-width: 600px;
+  max-height: 400px;
+  min-height: 200px;
+  overflow: auto;
+  position: fixed;
+  border: 2px solid #3131bd;
+  border-radius: 0px 0px 10px 10px;
+  border-top: 1px solid grey;
+}
+.dropdown-container .title {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 20px;
+  border-bottom: 1px solid grey;
+  align-items: center;
+}
+.dropdown-container .title p {
+  font-weight: 500;
+}
+.dropdown-container .close-btn {
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 50%;
+  color: white;
+  background-color: red;
+  border: none;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+.dropdown-container .list-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #e2e0e0;
+}
+.dropdown-container .tile-container {
+  background-color: white;
+  display: flex;
+  height: 5em;
+  margin-bottom: 1em;
+}
+.dropdown-container .tile-container .btn-container, .dropdown-container .tile-container .list-rating, .dropdown-container .tile-container .list-body, .dropdown-container .tile-container .serial-number {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.dropdown-container .tile-container .serial-number {
+  flex: 1;
+}
+.dropdown-container .tile-container .list-body {
+  flex-direction: column;
+  flex: 7;
+  padding: 0px 10px;
+}
+.dropdown-container .tile-container .list-body .list-title {
+  width: 100%;
+  font-weight: 500;
+}
+.dropdown-container .tile-container .list-body .list-description {
+  width: 100%;
+}
+.dropdown-container .tile-container .list-rating {
+  flex: 2;
+  flex-direction: column;
+}
+.dropdown-container .tile-container .list-rating div {
+  font-weight: 500;
+}
+.dropdown-container .tile-container .btn-container {
+  flex: 1;
+  cursor: pointer3;
 }
 
 .float-right {
@@ -191,9 +272,15 @@
   color: #1263f8;
 }
 
+.instructor-page {
+  display: flex;
+  justify-content: center;
+}
+
 .instructor-body {
   display: flex;
   background-color: white;
+  width: 100%;
   padding: 50px 5%;
   padding-top: 100px;
   flex-direction: column;
@@ -215,29 +302,60 @@
 .course-container .course-form {
   padding: 0px 20px;
 }
-.course-container .course-form .form-body {
+
+.form-container {
+  min-width: 350px;
+  min-height: 300px;
+  padding: 0px 20px;
+  background-color: white;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  border: 1px solid gainsboro;
+}
+.form-container form {
+  width: 100%;
+  height: 100%;
+}
+
+.backDrop {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 50;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-body {
   padding: 20px 0px;
   color: #131111;
 }
-.course-container .course-form .form-body div {
+.form-body div {
   display: flex;
   flex-direction: column;
   padding-bottom: 10px;
 }
-.course-container .course-form .form-body div label {
+.form-body div label {
   padding-bottom: 5px;
   font-weight: 500;
 }
-.course-container .course-form .form-body div input {
+.form-body div input {
   min-height: 1.5em;
 }
-.course-container .course-form .form-body div .upload-button {
+.form-body div .upload-button {
   max-width: 10em;
 }
-.course-container .course-form .form-body div textarea {
+.form-body div textarea {
   height: 5em;
 }
-.course-container .course-form .form-body div .input-style {
+.form-body div .input-style {
   max-width: 400px;
   border-radius: 5px;
   padding-left: 5px;

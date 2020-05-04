@@ -1,34 +1,42 @@
 {
   "users": [
     {
-      "id": 1,
-      "first_name": "Robert",
-      "last_name": "Schwartz",
-      "email": "rob23@gmail.com"
-    },
-    {
-      "id": 2,
-      "first_name": "Lucy",
-      "last_name": "Ballmer",
-      "email": "lucyb56@gmail.com"
-    },
-    {
-      "id": 3,
-      "first_name": "Anna",
-      "last_name": "Smith",
-      "email": "annasmith23@gmail.com"
-    },
-    {
-      "id": 4,
-      "first_name": "Robert",
-      "last_name": "Brown",
-      "email": "bobbrown432@yahoo.com"
-    },
-    {
-      "id": 5,
-      "first_name": "Roger",
-      "last_name": "Bacon",
-      "email": "rogerbacon12@yahoo.com"
+      "isInstructor": "true",
+      "isStudent": "false",
+      "id": "115094120654715411593",
+      "details": {
+        "name": "Paul Okafor",
+        "password": "Adedoyin",
+        "email": "okaforpaul26@gmail.com",
+        "username": "Paulo"
+      },
+      "student": {
+        "favorites": []
+      },
+      "instructor": {
+        "courses": [
+          {
+            "course_name": "Flutter Intro",
+            "course_description": "Design beautiful apps on the go with flutter!",
+            "category": "Flutter",
+            "link": "http://res.cloudinary.com/paulo/image/upload/v1588559972/tmmmxtg0kccpbv4p15wx.png",
+            "thumbnail": "https://res.cloudinary.com/paulo/image/upload/c_limit,h_60,w_90/v1588559972/tmmmxtg0kccpbv4p15wx.png",
+            "rating": 0,
+            "favorites": 0,
+            "id": "59ccde8426a871169b33212477fb4e646590d913"
+          },
+          {
+            "course_name": "this workssss!!!!",
+            "course_description": "Wow finally! This is great",
+            "category": "React",
+            "link": "http://res.cloudinary.com/paulo/image/upload/v1588565587/mtxba8ch3gu6y1zuds5m.jpg",
+            "thumbnail": "https://res.cloudinary.com/paulo/image/upload/c_limit,h_60,w_90/v1588565587/mtxba8ch3gu6y1zuds5m.jpg",
+            "rating": 0,
+            "favorites": 0,
+            "id": "32fcb6abd36e60bdb54114ed1ffa3583cca87881"
+          }
+        ]
+      }
     }
   ]
 }

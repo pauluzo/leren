@@ -1,4 +1,5 @@
 import { Cloudinary as CoreCloudinary, Util } from "cloudinary-core";
+import { addUserVideo } from "../components/logic";
 
 const url = (publicId, options) => {
   const scOptions = Util.withSnakeCaseKeys(options);
@@ -29,21 +30,21 @@ export async function fetchPhotos(imageTag, setter) {
   });
 }
 
-export const beginUpload = tag => {
+export const beginUpload = (tag, userData, videoDetails) => {
   const uploadOptions = {
     cloudName: "paulo",
     tags: [tag],
     uploadPreset: "okaforpaul26",
   };
 
-  openUploadWidget(uploadOptions, (error, photos) => {
+  openUploadWidget(uploadOptions, (error, videoData) => {
     if(!error) {
-      if(photos.event === "success") {
-        console.log(photos);
-        console.log(photos.info.public_id);
+      if(videoData.event === "success") {
+        addUserVideo(userData, videoData.info, videoDetails);
       }
     } else {
       console.log(error);
+      alert(`Could not upload video successfully. Please try again.`)
     }
   })
 }

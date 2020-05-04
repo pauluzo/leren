@@ -35,19 +35,19 @@ $shadowColor: rgb(190, 201, 209);
   background-color: rgb(226, 224, 224);
 }
 
-.login-button {
-  @extend %button-shared;
-  background-color: $color2;
-  color: $color1;
-}
-
-.signup-button {
+.nav-btn1 {
   @extend %button-shared;
   background-color: $color1;
   color: $color2;
 }
 
-.instructor-button {
+.nav-btn2 {
+  @extend %button-shared;
+  background-color: $color2;
+  color: $color1;
+}
+
+.nav-btn3 {
   @extend %button-shared;
   border-radius: 0px;
   color: $color1;
@@ -66,6 +66,93 @@ $shadowColor: rgb(190, 201, 209);
   padding: 0px 15px;
   border-bottom: 1px solid grey;
   background-color: rgb(226, 224, 224);
+}
+
+.dropdown-container {
+  margin-top: 3em;
+  background-color: $color2;
+  color: black;
+  width: 60%;
+  min-width: 400px;
+  max-width: 600px;
+  max-height: 400px;
+  min-height: 200px;
+  overflow: auto;
+  position: fixed;
+  border: 2px solid $color1;
+  border-radius: 0px 0px 10px 10px;
+  border-top: 1px solid grey;
+  .title {
+    display: $display;
+    justify-content: space-between;
+    padding: 0px 20px;
+    border-bottom: 1px solid grey;
+    align-items: center;
+    p {
+      font-weight: 500;
+    }
+  }
+  .close-btn {
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 50%;
+    color: $color2;
+    background-color: red;
+    border: none;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
+
+  .list-container {
+    display: $display;
+    flex-direction: column;
+    width: 100%;
+    background-color: rgb(226, 224, 224);
+  }
+
+  .tile-container {
+    %tile-shared {
+      display: flex;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+    background-color: $color2;
+    display: $display;
+    height: 5em;
+    margin-bottom: 1em;
+    .serial-number {
+      @extend %tile-shared;
+      flex: 1;
+    }
+    .list-body {
+      @extend %tile-shared;
+      flex-direction: column;
+      flex: 7;
+      padding: 0px 10px;
+      .list-title {
+        width: 100%;
+        font-weight: 500;
+      }
+      .list-description {
+        width: 100%;
+      }
+    }
+    .list-rating {
+      @extend %tile-shared;
+      flex: 2;
+      flex-direction: column;
+      div {
+        font-weight: 500;
+      }
+    }
+    .btn-container {
+      @extend %tile-shared;
+      flex: 1;
+      cursor: pointer3;
+    }
+  }
 }
 
 .float-right {
@@ -211,9 +298,15 @@ $shadowColor: rgb(190, 201, 209);
 }
 
 // Instructor page styling
+.instructor-page {
+  display: flex;
+  justify-content: center;
+}
+
 .instructor-body {
   display: $display;
   background-color: $color2;
+  width: 100%;
   padding: 50px 5%;
   padding-top: 100px;
   flex-direction: column;
@@ -236,35 +329,66 @@ $shadowColor: rgb(190, 201, 209);
   }
   .course-form {
     padding: $padding;
-    .form-body {
-      padding: 20px 0px;
-      color: $color;
-      div {
-        display: $display;
-        flex-direction: column;
-        padding-bottom: 10px;
-        label {
-          padding-bottom: 5px;
-          font-weight: 500;
-        }
-        input {
-          min-height: 1.5em;
-        }
-        .upload-button {
-          @extend %button-shared;
-          @extend %blue-button;
-          max-width: 10em;
-        }
-        textarea {
-          height: 5em;
-        }
-        .input-style {
-          max-width: 400px;
-          border-radius: 5px;
-          padding-left: 5px;
-          background-color: $borderColor;
-        }
-      }
+  }
+}
+
+.form-container {
+  min-width: 350px;
+  min-height: 300px;
+  padding: 0px 20px;
+  background-color: white;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  border: 1px solid $borderColor;
+  form {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.backDrop {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 50;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-body {
+  padding: 20px 0px;
+  color: rgb(19, 17, 17);
+  div {
+    display: $display;
+    flex-direction: column;
+    padding-bottom: 10px;
+    label {
+      padding-bottom: 5px;
+      font-weight: 500;
+    }
+    input {
+      min-height: 1.5em;
+    }
+    .upload-button {
+      @extend %button-shared;
+      @extend %blue-button;
+      max-width: 10em;
+    }
+    textarea {
+      height: 5em;
+    }
+    .input-style {
+      max-width: 400px;
+      border-radius: 5px;
+      padding-left: 5px;
+      background-color: $borderColor;
     }
   }
 }

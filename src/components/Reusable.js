@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Logo from "../assets/images/logo.png";
 
 //React allows to import svg as a component.
@@ -17,14 +17,11 @@ import LinkedIn from "../assets/images/linkedin_logo.png";
 
 // Reusable Top Navigtion component 
 function TopNav (props) {
+  const NavContainer = props.navContainer;
   return(
     <div className="topnav">
       <img src={Logo} alt="Logo" style={{height: "2em", width: "4.5em"}}/>
-      <div className="float-right">
-        <div><button className="instructor-button" >Become an Instructor</button></div>
-        <div><button className="login-button">Log In</button></div>
-        <div><button className="signup-button">Sign Up</button></div>
-      </div>
+      <NavContainer/>
     </div>
   );
 }
@@ -38,8 +35,8 @@ function Category() {
     {icon: EngrIcon, title: "Engineering"},
     {icon: BusinessIcon, title: "Business & Management"},
   ]
-  const Cards = popularCategories.map((category) => {
-    return SubjectCard(category);
+  const Cards = popularCategories.map((category, index) => {
+    return SubjectCard(category, index);
   });
   return(
     <div className="category-container">
@@ -52,10 +49,10 @@ function Category() {
   );
 }
 
-function SubjectCard (props) {
+function SubjectCard (props, index) {
   let Icon = props.icon
   return (
-    <div className="subject-card" >
+    <div className="subject-card"  key={index}>
       <Icon style={{width: "2.5em", height: "2.5em"}} />
       <span>{props.title}</span>
     </div>
@@ -81,4 +78,65 @@ const Footer = () => {
   );
 }
 
-export {TopNav, Category, Footer};
+const Dropdown = (props) => {
+  useEffect(() => {
+    console.log("this runs onLoad");
+  })
+
+  const ListTiles = (props) => {
+    const getTiles = () => props.listData.map((courseData, index) => {
+      return ListTile(courseData, index, props.closable);
+    });
+
+    let tiles = getTiles();
+    return tiles;
+  }
+
+  console.log(props);
+  return(
+    <div className="dropdown-container">
+      <div className="title">
+        <p>{props.title}</p>
+        <CloseButton onClick={() => props.closeDropdown({showDropdown: false})}/>
+      </div>
+      <div className="list-container">
+        <ListTiles listData={props.listData} closable={props.closable} />
+      </div>
+    </div>
+  );
+}
+
+const ListTile = (data, index, deleteFunction) => {
+  const style = {
+    backgroundColor: "white",
+    color: "red",
+  }
+
+  return (
+    <div key={index} className="tile-container">
+      <div className="serial-number">
+        {index + 1}
+      </div>
+      <div className="list-body">
+        <div className="list-title">
+          {data.course_name.length > 30 ? (data.course_name.slice(0, 30) + "...") : data.course_name}
+        </div>
+        <div className="list-description">
+          {data.course_description.length > 50 ? (data.course_description.slice(0, 50) + "...") : data.course_description}
+        </div>
+      </div>
+      <div className="list-rating">
+        <div>Rating</div>
+        {(data.rating === 0) ? "N/A" : data.rating}
+      </div>
+      {deleteFunction && <div className="btn-container"> <CloseButton style={style} onClick={deleteFunction} index={index} /> </div>}
+    </div>
+  );
+}
+
+const CloseButton = (props) => {
+  let style = props.style ? props.style : {};
+  return <button style={style} className="close-btn" onClick={() => props.onClick(props.index)} >X</button>;
+}
+
+export {TopNav, Category, Footer, Dropdown};
