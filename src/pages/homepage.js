@@ -6,6 +6,7 @@ import {TopNav, Category, Footer} from "../components/Reusable";
 import {createUser} from "../components/logic";
 import HomeImage1 from "../assets/images/home-img1.png"
 import HomeImage2 from "../assets/images/home-img2.png"
+import { getRequest } from "../services/JsonService";
 
 // Home page which is to be displayed once the application is started
 class HomePage extends React.Component {
@@ -165,7 +166,10 @@ const BackDrop = props => {
           localStorage.setItem("userData", JSON.stringify(data));
           if(history) history.push("/profile");
         })
-
+        .catch((error) => {
+          console.log(error);
+          alert("This user already exist.");
+        })
       }
       getUserData();
     }
@@ -246,7 +250,17 @@ const BackDrop = props => {
 
     // Function to handle the login process
     handleLogin = () => {
+      const {password, email} = this.state;
 
+      if(password === "" || email === "") {
+        alert("Error! Your input fields are not properly filled ");
+        return;
+      }
+      getRequest(email)
+      .then((response) => {
+
+      })
+      .catch((_) => alert("Login falied. Please check your network connection"));
     }
 
     // Function to handle the form input change

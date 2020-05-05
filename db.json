@@ -1,14 +1,42 @@
 {
   "users": [
     {
-      "isInstructor": "true",
-      "isStudent": "false",
+      "id": "abcdef00011111ghij",
+      "suggestion_courses": [
+        {
+          "course_name": "React Video",
+          "course_description": "This should workk, I hope",
+          "category": "React",
+          "link": "http://res.cloudinary.com/paulo/image/upload/v1588698140/ekmdmjnykpy0cywag96d.jpg",
+          "thumbnail": "https://res.cloudinary.com/paulo/image/upload/c_limit,h_60,w_90/v1588698140/ekmdmjnykpy0cywag96d.jpg",
+          "rating": 0,
+          "favorites": 0,
+          "id": "7f79e54d87e3a53cbdc522cb5c8605112984ac89",
+          "user_image": "https://lh5.googleusercontent.com/-qf9l2YEYFZ4/AAAAAAAAAAI/AAAAAAAAAAA/AAKWJJOF3oY4vCLRB3DBuHhrs5kzzPdBAw/s96-c/photo.jpg"
+        },
+        {
+          "course_name": "Intro to React",
+          "course_description": "Hopefully, no error gotten",
+          "category": "React",
+          "link": "http://res.cloudinary.com/paulo/image/upload/v1588698569/ifnturl1ribrnz7o00gg.jpg",
+          "thumbnail": "https://res.cloudinary.com/paulo/image/upload/c_limit,h_60,w_90/v1588698569/ifnturl1ribrnz7o00gg.jpg",
+          "rating": 0,
+          "favorites": 0,
+          "id": "47fb5d71375cfbab0f802ad8a61ea2921d180dd3",
+          "user_image": "https://lh5.googleusercontent.com/-qf9l2YEYFZ4/AAAAAAAAAAI/AAAAAAAAAAA/AAKWJJOF3oY4vCLRB3DBuHhrs5kzzPdBAw/s96-c/photo.jpg"
+        }
+      ]
+    },
+    {
+      "isInstructor": "false",
+      "isStudent": "true",
       "id": "115094120654715411593",
       "details": {
         "name": "Paul Okafor",
-        "password": "Adedoyin",
+        "password": "Adedoyin1",
         "email": "okaforpaul26@gmail.com",
-        "username": "Paulo"
+        "username": "suokafor",
+        "image": "https://lh5.googleusercontent.com/-qf9l2YEYFZ4/AAAAAAAAAAI/AAAAAAAAAAA/AAKWJJOF3oY4vCLRB3DBuHhrs5kzzPdBAw/s96-c/photo.jpg"
       },
       "student": {
         "favorites": []
@@ -16,24 +44,15 @@
       "instructor": {
         "courses": [
           {
-            "course_name": "Flutter Intro",
-            "course_description": "Design beautiful apps on the go with flutter!",
-            "category": "Flutter",
-            "link": "http://res.cloudinary.com/paulo/image/upload/v1588559972/tmmmxtg0kccpbv4p15wx.png",
-            "thumbnail": "https://res.cloudinary.com/paulo/image/upload/c_limit,h_60,w_90/v1588559972/tmmmxtg0kccpbv4p15wx.png",
-            "rating": 0,
-            "favorites": 0,
-            "id": "59ccde8426a871169b33212477fb4e646590d913"
-          },
-          {
-            "course_name": "this workssss!!!!",
-            "course_description": "Wow finally! This is great",
+            "course_name": "Intro to React",
+            "course_description": "Hopefully, no error gotten",
             "category": "React",
-            "link": "http://res.cloudinary.com/paulo/image/upload/v1588565587/mtxba8ch3gu6y1zuds5m.jpg",
-            "thumbnail": "https://res.cloudinary.com/paulo/image/upload/c_limit,h_60,w_90/v1588565587/mtxba8ch3gu6y1zuds5m.jpg",
+            "link": "http://res.cloudinary.com/paulo/image/upload/v1588698569/ifnturl1ribrnz7o00gg.jpg",
+            "thumbnail": "https://res.cloudinary.com/paulo/image/upload/c_limit,h_60,w_90/v1588698569/ifnturl1ribrnz7o00gg.jpg",
             "rating": 0,
             "favorites": 0,
-            "id": "32fcb6abd36e60bdb54114ed1ffa3583cca87881"
+            "id": "47fb5d71375cfbab0f802ad8a61ea2921d180dd3",
+            "user_image": "https://lh5.googleusercontent.com/-qf9l2YEYFZ4/AAAAAAAAAAI/AAAAAAAAAAA/AAKWJJOF3oY4vCLRB3DBuHhrs5kzzPdBAw/s96-c/photo.jpg"
           }
         ]
       }

@@ -20,7 +20,7 @@ function TopNav (props) {
   const NavContainer = props.navContainer;
   return(
     <div className="topnav">
-      <img src={Logo} alt="Logo" style={{height: "2em", width: "4.5em"}}/>
+      <img src={Logo} alt="Logo" style={{height: "2em", width: "4.5em", marginRight: "20px"}}/>
       <NavContainer/>
     </div>
   );

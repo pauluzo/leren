@@ -64,7 +64,11 @@ class InstructorPage extends React.Component {
     let storageResponse = localStorage.getItem("userData");
     let userData = JSON.parse(storageResponse);
     userData.instructor.courses = courses;
-    putRequest(userData.id, userData);
+    putRequest(userData.id, userData)
+    .then((resp) => {
+      localStorage.setItem("userData", JSON.stringify(resp.data));
+      alert("Update has been saved successfully!");
+    })
   }
 
   handleSubmit = () => {
@@ -97,6 +101,7 @@ class InstructorPage extends React.Component {
 
   render() {
     const {courseName, courseDescription, category, myCourses, showDropdown} = this.state;
+    
     return(
       <div className="instructor-page">
         <TopNav navContainer={this.navContainer}/>
