@@ -100,7 +100,7 @@ const Dropdown = (props) => {
         <CloseButton onClick={() => props.closeDropdown({showDropdown: false})}/>
       </div>
       <div className="list-container">
-        <ListTiles listData={props.listData} closable={props.closable} />
+        {props.listData.length > 1 ? <ListTiles listData={props.listData} closable={props.closable} /> : alert("You have not selected any favorite movie(s) yet.")}
       </div>
     </div>
   );

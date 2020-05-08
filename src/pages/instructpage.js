@@ -90,7 +90,8 @@ class InstructorPage extends React.Component {
           suggestCourses.splice(index, 1);
           response.suggestion_courses = suggestCourses;
           putRequest("abcdef00011111ghij", response)
-          .then((resp) => console.log(resp));
+          .then((resp) => console.log(resp))
+          .catch("Could not update successfully. Check your network connection");
           return;
         }
       })
