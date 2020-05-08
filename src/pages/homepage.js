@@ -1,6 +1,7 @@
 import React from "react";
 import { GoogleLogin, } from 'react-google-login';
 import {withRouter} from "react-router-dom";
+import {CloseButton} from "../components/Reusable";
 
 import {TopNav, Category, Footer} from "../components/Reusable";
 import {createUser} from "../components/logic";
@@ -42,7 +43,7 @@ class HomePage extends React.Component {
 
     return(
       <div className="homepage">
-        {isLoggedin && <BackDrop isInstructor={isInstructor} buttonType={buttonType} history={history}/>}
+        {isLoggedin && <BackDrop isInstructor={isInstructor} buttonType={buttonType} history={history} resetState={this.resetState}/>}
         <TopNav
           navContainer={() => this.navContainer(this.isLoggedin, this.resetState)}
         />
@@ -157,6 +158,7 @@ const BackDrop = props => {
     }
 
     responseGoogle = response => {
+      const profile = isInstructor ? "instructor" : "student";
       userData.googleCred = response.profileObj;
       console.log(userData);
       function getUserData () {
@@ -164,7 +166,7 @@ const BackDrop = props => {
         .then((data) => {
           console.log(data);
           localStorage.setItem("userData", JSON.stringify(data));
-          if(history) history.push("/profile");
+          if(history) history.push("/profile", `${profile}`);
         })
         .catch((error) => {
           console.log(error);
@@ -249,18 +251,37 @@ const BackDrop = props => {
     }
 
     // Function to handle the login process
-    handleLogin = () => {
+    handleLogin = async () => {
       const {password, email} = this.state;
 
       if(password === "" || email === "") {
         alert("Error! Your input fields are not properly filled ");
         return;
       }
-      getRequest(email)
-      .then((response) => {
-
-      })
-      .catch((_) => alert("Login falied. Please check your network connection"));
+      const response = await getRequest(email);
+      console.log(response);
+      if(response) {
+        console.log("this runs");
+        
+        if(response.length < 1) {
+          alert("The credentials you entered are incorrect! Please check.");
+          return;
+        }
+        response.forEach((user) => {
+          if(user.details.email === email && user.details.password === password) {
+            console.log("this runs");
+            localStorage.setItem("userData", JSON.stringify(user));
+            if(user.isInstructor) {
+              console.log("instructor");
+              history.push("/profile", "instructor");
+            } else if(user.isStudent) {
+              console.log("student");
+              history.push("/profile", "student");
+            }
+            return;
+          } else alert("The credentials you entered are incorrect! Please check.");
+        });
+      }
     }
 
     // Function to handle the form input change
@@ -268,11 +289,9 @@ const BackDrop = props => {
       const target = event.target;
       const name = target.name;
       const value = target.value;
-      console.log(value);
       this.setState({
         [name]: value
       })
-      console.log(this.state[name]);
     }
 
     render() {
@@ -297,7 +316,7 @@ const BackDrop = props => {
           </div>
           <div>
             <input className="upload-button"
-              onClick={() => this.handleLogin}
+              onClick={this.handleLogin}
               type="button" value="Log In"
             />
           </div>
@@ -309,10 +328,13 @@ const BackDrop = props => {
   return(
     <div className='backDrop'>
       <div className="form-container">
-        <h4>Enter your details in the form below</h4>
+        <div style={{display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%"}}>
+          <h4>Enter your details in the form below</h4>
+          <CloseButton onClick={() => props.resetState({isLoggedin: false})}/>
+        </div>
         {
           (props.buttonType === "login") ? 
-          <LoginForm/> : <SignInForm googleButton={props.googleButton} />
+          <LoginForm/> : <SignInForm googleButton={props.googleButton} isInstructor={isInstructor}/>
         }
       </div>
     </div>

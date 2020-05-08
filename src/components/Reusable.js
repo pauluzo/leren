@@ -129,7 +129,7 @@ const ListTile = (data, index, deleteFunction) => {
         <div>Rating</div>
         {(data.rating === 0) ? "N/A" : data.rating}
       </div>
-      {deleteFunction && <div className="btn-container"> <CloseButton style={style} onClick={deleteFunction} index={index} /> </div>}
+      {deleteFunction && <div className="btn-container"> <CloseButton style={style} onClick={() => deleteFunction(index)} index={index} /> </div>}
     </div>
   );
 }
@@ -139,4 +139,4 @@ const CloseButton = (props) => {
   return <button style={style} className="close-btn" onClick={() => props.onClick(props.index)} >X</button>;
 }
 
-export {TopNav, Category, Footer, Dropdown};
+export {TopNav, Category, Footer, Dropdown, CloseButton};

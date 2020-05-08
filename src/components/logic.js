@@ -63,5 +63,10 @@ export function addUserVideo(userData, videoData, courseDetails) {
   newCourse["user_name"] = data.details.name;
   data.instructor.courses.push(newCourse);
   putRequest(data.id, data)
+  .then((response) => {
+    console.log(response);
+    localStorage.setItem("userData", JSON.stringify(response));
+  })
+  .catch((error) => console.log(error));
   addToSuggestion(newCourse);
 }

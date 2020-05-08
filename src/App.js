@@ -3,8 +3,7 @@ import {CloudinaryContext} from "cloudinary-react";
 import {Route, Switch} from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/homepage';
-import InstructorPage from './pages/instructpage';
-import StudentPage from "./pages/studentpage";
+import ProfilePage from "./pages/profile";
 
 function App() {
 
@@ -13,8 +12,7 @@ function App() {
       <div className="App">
         <Switch>
           <Route exact path='/' component={HomePage} />
-          <Route path="/profile" component={InstructorPage} />
-          <Route path="/student" component={StudentPage} />
+          <Route path="/profile" component={ProfilePage} />
         </Switch>
       </div>
     </CloudinaryContext>

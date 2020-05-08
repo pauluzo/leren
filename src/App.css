@@ -73,6 +73,7 @@
   border: 2px solid #3131bd;
   border-radius: 0px 0px 10px 10px;
   border-top: 1px solid grey;
+  z-index: 20;
 }
 .dropdown-container .title {
   display: flex;
@@ -83,17 +84,6 @@
 }
 .dropdown-container .title p {
   font-weight: 500;
-}
-.dropdown-container .close-btn {
-  font-size: 18px;
-  font-weight: 500;
-  border-radius: 50%;
-  color: white;
-  background-color: red;
-  border: none;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
 }
 .dropdown-container .list-container {
   display: flex;
@@ -138,6 +128,18 @@
 .dropdown-container .tile-container .btn-container {
   flex: 1;
   cursor: pointer3;
+}
+
+.close-btn {
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 50%;
+  color: white;
+  background-color: red;
+  border: none;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
 }
 
 .nav-container {
@@ -302,19 +304,36 @@
   color: #1263f8;
 }
 
-.player-container {
-  width: 100%;
+.student-page {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+  flex-direction: column;
+}
+
+.player-container {
+  max-width: 640px;
   padding-top: 3em;
   padding-bottom: 10px;
+  margin: 0px auto;
+}
+
+.page-body {
+  display: flex;
+  padding: 20px 5%;
+  flex-direction: column;
+}
+.page-body h2, .page-body h4 {
+  margin: 0px;
+  padding: 1em 0px;
+}
+.page-body span {
+  padding-bottom: 1em;
 }
 
 .suggestion-container {
   display: flex;
-  padding: 20px 5%;
   flex-wrap: wrap;
+  padding-top: 1em;
 }
 
 .moviecard-container {
@@ -332,6 +351,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  cursor: pointer;
   border-radius: 10px 10px 0px 0px;
 }
 .moviecard-container .course-image img {

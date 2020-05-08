@@ -1,6 +1,6 @@
 const axios = require("axios");
-var urll = "https://personal-json-server.herokuapp.com/users";
-var url = "http://localhost:3002/users";
+var url = "https://personal-json-server.herokuapp.com/users";
+var testUrl = "http://localhost:3002/users";
 
 export async function getRequest(searchQuery) {
   let myUrl = url;

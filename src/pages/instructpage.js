@@ -1,6 +1,6 @@
 import React from 'react';
 import {beginUpload} from "../services/CloudinaryService";
-import {putRequest} from "../services/JsonService";
+import {putRequest, getRequest} from "../services/JsonService";
 import {TopNav, Dropdown} from "../components/Reusable";
 import {ReactComponent as CourseIcon1} from "../assets/icons/course1-icon.svg";
 import {ReactComponent as CourseIcon2} from "../assets/icons/course2-icon.svg";
@@ -18,6 +18,11 @@ class InstructorPage extends React.Component {
     }
   }
 
+  changeProfile = () => {
+    const resetProfile = this.props.resetProfile;
+    resetProfile({isStudent: true})
+  }
+
   handleInput = (e) => {
     const target = e.target;
     const name = target.name;
@@ -29,34 +34,40 @@ class InstructorPage extends React.Component {
 
   handleLogout = () => {
     const history = this.props.history;
-    if(history) history.goBack();
+    if(history) {
+      history.goBack();
+    };
   }
 
   navContainer = () => {
     // Get the most updated list of courses for the instructor
     const fetchCourses = () => {
+      console.log("this runs");
       let storageResponse = localStorage.getItem("userData");
+      console.log(storageResponse);
       let userData = JSON.parse(storageResponse);
+      console.log(userData);
       let courses = userData.instructor.courses;
       console.log(courses);
-      this.setState({
+      this.setState((prevState) => ({
         myCourses: courses,
-        showDropdown: true,
-      });
+        showDropdown: !prevState.showDropdown,
+      }));
     }
 
     return (
       <div className='float-right'>
-        <div><button className="nav-btn3" onClick={() => {}} >Learn a course</button></div>
+        <div><button className="nav-btn3" onClick={this.changeProfile} >Learn a course</button></div>
         <div><button className="nav-btn2" onClick={() => fetchCourses()} >My Courses</button></div>
-        <div><button className="nav-btn1" onClick={() => this.handleLogout} >Log Out</button></div>
+        <div><button className="nav-btn1" onClick={this.handleLogout} >Log Out</button></div>
       </div>
     );
   }
 
   deleteCourse = (index) => {
     let courses = this.state.myCourses;
-    courses.splice(index, 1);
+    let deletedCourse = courses.splice(index, 1);
+    console.log(deletedCourse);
     console.log(courses);
     console.log(this.state.myCourses);
     this.setState({myCourses: courses})
@@ -66,8 +77,22 @@ class InstructorPage extends React.Component {
     userData.instructor.courses = courses;
     putRequest(userData.id, userData)
     .then((resp) => {
-      localStorage.setItem("userData", JSON.stringify(resp.data));
+      console.log(resp);
+      localStorage.setItem("userData", JSON.stringify(resp));
       alert("Update has been saved successfully!");
+    });
+    getRequest("abcdef00011111ghij")
+    .then((resp) => {
+      let response = resp;
+      let suggestCourses = resp.suggestion_courses;
+      suggestCourses.forEach((course, index) => {
+        if(course.id === deletedCourse.id) {
+          suggestCourses.splice(index, 1);
+          response.suggestion_courses = suggestCourses;
+          putRequest("abcdef00011111ghij", response)
+          .then((resp) => console.log(resp));
+        }
+      })
     })
   }
 
