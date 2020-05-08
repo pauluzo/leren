@@ -271,10 +271,10 @@ const BackDrop = props => {
           if(user.details.email === email && user.details.password === password) {
             console.log("this runs");
             localStorage.setItem("userData", JSON.stringify(user));
-            if(user.isInstructor === true) {
+            if(user.isInstructor) {
               console.log("instructor");
               history.push("/profile", "instructor");
-            } else if(user.isStudent === true) {
+            } else if(user.isStudent) {
               console.log("student");
               history.push("/profile", "student");
             }
