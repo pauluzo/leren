@@ -84,6 +84,9 @@ const Dropdown = (props) => {
   })
 
   const ListTiles = (props) => {
+    if(props.listData.length > 1) {
+      alert("You list is empty");
+    }
     const getTiles = () => props.listData.map((courseData, index) => {
       return ListTile(courseData, index, props.closable);
     });
@@ -100,7 +103,7 @@ const Dropdown = (props) => {
         <CloseButton onClick={() => props.closeDropdown({showDropdown: false})}/>
       </div>
       <div className="list-container">
-        {props.listData.length > 1 ? <ListTiles listData={props.listData} closable={props.closable} /> : alert("You have not selected any favorite movie(s) yet.")}
+        <ListTiles listData={props.listData} closable={props.closable} />
       </div>
     </div>
   );
