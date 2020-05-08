@@ -83,7 +83,7 @@ class InstructorPage extends React.Component {
     });
     getRequest("abcdef00011111ghij")
     .then((resp) => {
-      let response = resp;
+      let response = resp[0];
       let suggestCourses = resp.suggestion_courses;
       suggestCourses.forEach((course, index) => {
         if(course.id === deletedCourse.id) {
@@ -91,6 +91,7 @@ class InstructorPage extends React.Component {
           response.suggestion_courses = suggestCourses;
           putRequest("abcdef00011111ghij", response)
           .then((resp) => console.log(resp));
+          return;
         }
       })
     })
