@@ -84,7 +84,9 @@ class InstructorPage extends React.Component {
     getRequest("abcdef00011111ghij")
     .then((resp) => {
       let response = resp[0];
-      let suggestCourses = resp.suggestion_courses;
+      console.log(response)
+      let suggestCourses = response.suggestion_courses;
+      console.log(suggestCourses);
       suggestCourses.forEach((course, index) => {
         if(course.id === deletedCourse.id) {
           suggestCourses.splice(index, 1);

@@ -84,7 +84,7 @@ const Dropdown = (props) => {
   })
 
   const ListTiles = (props) => {
-    if(props.listData.length > 1) {
+    if(props.listData.length < 1) {
       alert("You list is empty");
     }
     const getTiles = () => props.listData.map((courseData, index) => {
