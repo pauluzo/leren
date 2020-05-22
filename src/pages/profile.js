@@ -6,7 +6,6 @@ import InstructorPage from "./instructpage";
  class Profile extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       isStudent: (props.location.state === "student" ? true : false)
     }

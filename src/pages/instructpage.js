@@ -5,6 +5,7 @@ import {TopNav, Dropdown} from "../components/Reusable";
 import {ReactComponent as CourseIcon1} from "../assets/icons/course1-icon.svg";
 import {ReactComponent as CourseIcon2} from "../assets/icons/course2-icon.svg";
 import { withRouter } from 'react-router-dom';
+import { Nav, Container, Row, Col } from 'react-bootstrap';
 
 class InstructorPage extends React.Component {
   constructor(props) {
@@ -42,57 +43,48 @@ class InstructorPage extends React.Component {
   navContainer = () => {
     // Get the most updated list of courses for the instructor
     const fetchCourses = () => {
-      console.log("this runs");
       let storageResponse = localStorage.getItem("userData");
-      console.log(storageResponse);
       let userData = JSON.parse(storageResponse);
-      console.log(userData);
       let courses = userData.instructor.courses;
-      console.log(courses);
-      this.setState((prevState) => ({
-        myCourses: courses,
-        showDropdown: !prevState.showDropdown,
-      }));
+      if(courses && courses.length > 0) {
+        this.setState((prevState) => ({
+          myCourses: courses,
+          showDropdown: !prevState.showDropdown,
+        }));
+      } else alert("You don't seem to have any courses uploaded, yet.")
     }
 
     return (
-      <div className='float-right'>
-        <div><button className="nav-btn3" onClick={this.changeProfile} >Learn a course</button></div>
-        <div><button className="nav-btn2" onClick={() => fetchCourses()} >My Courses</button></div>
-        <div><button className="nav-btn1" onClick={this.handleLogout} >Log Out</button></div>
-      </div>
+      <Nav className="ml-auto">
+        <Nav.Link onClick={this.changeProfile} >Learn a course</Nav.Link>
+        <Nav.Link onClick={() => fetchCourses()} >My Courses</Nav.Link>
+        <Nav.Link onClick={this.handleLogout} >Log Out</Nav.Link>
+      </Nav>
     );
   }
 
   deleteCourse = (index) => {
     let courses = this.state.myCourses;
     let deletedCourse = courses.splice(index, 1);
-    console.log(deletedCourse);
-    console.log(courses);
-    console.log(this.state.myCourses);
     this.setState({myCourses: courses})
-    console.log(this.state.myCourses);
     let storageResponse = localStorage.getItem("userData");
     let userData = JSON.parse(storageResponse);
     userData.instructor.courses = courses;
     putRequest(userData.id, userData)
     .then((resp) => {
-      console.log(resp);
       localStorage.setItem("userData", JSON.stringify(resp));
       alert("Update has been saved successfully!");
     });
     getRequest("abcdef00011111ghij")
     .then((resp) => {
       let response = resp[0];
-      console.log(response)
       let suggestCourses = response.suggestion_courses;
-      console.log(suggestCourses);
       suggestCourses.forEach((course, index) => {
-        if(course.id === deletedCourse.id) {
+        if(course.id === deletedCourse[0].id) {
           suggestCourses.splice(index, 1);
           response.suggestion_courses = suggestCourses;
           putRequest("abcdef00011111ghij", response)
-          .then((resp) => console.log(resp))
+          .then((_) => {return;})
           .catch("Could not update successfully. Check your network connection");
           return;
         }
@@ -105,7 +97,6 @@ class InstructorPage extends React.Component {
     // Function to ensure that an updated version of the userData is passed
     function getUserData() {
       let storageResponse = localStorage.getItem("userData");
-      console.log(storageResponse);
       let userData = JSON.parse(storageResponse);
       return userData;
     }
@@ -145,8 +136,8 @@ class InstructorPage extends React.Component {
         <div className="instructor-body">
           <div className="course-container">
             <div className="course-intro">
-              <h3>Upload your course</h3>
-              <h5>Fill in the necessary details below</h5>
+              <h4>Upload your course</h4>
+              <h6>Fill in the necessary details below</h6>
             </div>
             <div className="course-form">
               <form className="form-body">
@@ -188,35 +179,35 @@ class InstructorPage extends React.Component {
               </form>
             </div>
           </div>
-          <div className="resources-container">
-            <h4>Getting started with creating courses? These materials would be helpful</h4>
-            <div className="material-container">
-              <div className="material-message">
+          <h6>Getting started with creating courses? These materials would be helpful</h6>
+          <Container className="instructor-materials" fluid>
+            <Row>
+              <Col xs="12" sm="8" >
                 <h4>Create an engaging course</h4>
                 <p>
                   Irrespective of teaching experience, you can make an engaging
                   course. Check the link below, it's a great place to start.
                 </p>
                 <span><a style={{textDecoration: "none"}} href="https://www.github.com/pauluzo">Read more</a></span>
-              </div>
-              <div className="material-icon">
+              </Col>
+              <Col xs="12" sm="4">
                 <CourseIcon1 style={{width: "10em", height: "10em"}} />
-              </div>
-            </div>
-            <div className="material-container">
-              <div className="material-icon">
+              </Col>
+            </Row>
+            <Row>
+              <Col xs="12" sm="4">
                 <CourseIcon2 style={{width: "9em", height: "9em"}} />
-              </div>
-              <div className="material-message">
+              </Col>
+              <Col xs="12" sm="8">
                 <h4>Get started with videos</h4>
                 <p>
                   Quality video lectures can set your course apart and are
                   more appealing to students. Looking to get started? Check the link below.
                 </p>
                 <span><a style={{textDecoration: "none"}} href="https://www.github.com/pauluzo">Read more</a></span>
-              </div>
-            </div>
-          </div>
+              </Col>
+            </Row>
+          </Container>
         </div>
       </div>
     );

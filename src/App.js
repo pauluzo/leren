@@ -6,7 +6,6 @@ import HomePage from './pages/homepage';
 import ProfilePage from "./pages/profile";
 
 function App() {
-
   return (
     <CloudinaryContext cloudName="paulo">
       <div className="App">

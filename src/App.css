@@ -1,16 +1,16 @@
-.material-container, .course-container, .subject-card {
+.material-container {
   -webkit-box-shadow: 10px 11px 5px -4px #bec9d1;
   -moz-box-shadow: 10px 11px 5px -4px #bec9d1;
   box-shadow: 10px 11px 5px -4px #bec9d1;
 }
 
-.form-body div .upload-button, .intro-left div button, .nav-btn3, .nav-btn2, .nav-btn1 {
+.intro-left div button, .nav-btn3, .nav-btn2, .nav-btn1 {
   padding: 7px 20px;
   border-radius: 20px;
   cursor: pointer;
 }
 
-.form-body div .upload-button, .intro-left div button {
+.intro-left div button {
   border-radius: 10px;
   background-color: #3131bd;
   color: white;
@@ -60,7 +60,7 @@
 }
 
 .dropdown-container {
-  margin-top: 3em;
+  margin-top: 3.6rem;
   background-color: white;
   color: black;
   width: 60%;
@@ -156,20 +156,6 @@
 .nav-container .float-left form {
   display: flex;
 }
-.nav-container .float-left form .search-input {
-  width: 250px;
-  background-color: inherit;
-  font-size: 15px;
-  border-radius: 10px;
-  padding-left: 5px;
-}
-.nav-container .float-left form .search-button {
-  border-color: #3131bd;
-  cursor: pointer;
-  margin-left: 10px;
-  font-size: 15px;
-  height: 30px;
-}
 
 .float-right {
   display: flex;
@@ -253,23 +239,6 @@
 .card-container {
   display: flex;
   flex-wrap: wrap;
-}
-
-.subject-card {
-  margin: 20px 30px 20px 0px;
-  width: 200px;
-  height: 50px;
-  border: 2px solid #1263f8;
-  border-radius: 15px;
-  display: flex;
-  padding: 10px 20px;
-  background-color: white;
-  align-items: center;
-}
-.subject-card span {
-  padding-left: 20px;
-  font-weight: 600;
-  color: #1263f8;
 }
 
 .footer_outer_container {
@@ -413,39 +382,6 @@
   align-items: center;
 }
 
-.course-container {
-  border: 1px solid gainsboro;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-.course-container .course-intro {
-  padding: 0px 20px;
-  color: #131111;
-  border-bottom: 1px solid gainsboro;
-}
-.course-container .course-form {
-  padding: 0px 20px;
-}
-
-.form-container {
-  min-width: 350px;
-  min-height: 300px;
-  padding: 0px 20px;
-  background-color: white;
-  flex-direction: column;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 20px;
-  border: 1px solid gainsboro;
-}
-.form-container form {
-  width: 100%;
-  height: 100%;
-}
-
 .backDrop {
   position: fixed;
   height: 100%;
@@ -457,43 +393,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.form-body {
-  padding: 20px 0px;
-  color: #131111;
-}
-.form-body div {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 10px;
-}
-.form-body div label {
-  padding-bottom: 5px;
-  font-weight: 500;
-}
-.form-body div input {
-  min-height: 1.5em;
-}
-.form-body div .upload-button {
-  max-width: 10em;
-}
-.form-body div textarea {
-  height: 5em;
-}
-.form-body div .input-style {
-  max-width: 400px;
-  border-radius: 5px;
-  padding-left: 5px;
-  background-color: gainsboro;
-}
-
-.resources-container {
-  padding: 10px 0px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
 }
 
 .material-container {

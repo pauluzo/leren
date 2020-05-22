@@ -1,0 +1,255 @@
+$color1: rgb(49, 49, 189);
+$color2: white;
+$display: flex;
+$color3: rgb(18, 99, 248);
+$borderColor: rgb(220, 220, 220);
+$shadowColor: rgb(190, 201, 209);
+
+%box-shadow {
+  -webkit-box-shadow: 10px 11px 5px -4px $shadowColor;
+  -moz-box-shadow: 10px 11px 5px -4px $shadowColor;
+  box-shadow: 10px 11px 5px -4px $shadowColor;
+}
+
+%button-shared {
+  padding: 7px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+%blue-button {
+  border-radius: 10px;
+  background-color: $color1;
+  color: $color2;
+  border-width: 0px;
+}
+
+.row {
+  padding: 10px 20px;
+  background-color: $color2;
+}
+
+.column {
+  display: $display;
+  align-items: center;
+}
+
+.search-nav {
+  display: $display;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-input {
+  width: 250px;
+  background-color: whitesmoke;
+  font-size: 15px;
+  border-radius: 10px;
+  padding-left: 5px;
+}
+      
+.search-button {
+  border-color: $color1;
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: 15px;
+  height: 30px;
+}
+
+.home-text-col {
+  display: $display;
+  align-items: center;
+  font-weight: 500;
+  line-height: 1.8em;
+  padding-top: 10px
+}
+
+.col-btn {
+  margin: 20px 0px;
+  border-radius: 10px;
+  background-color: #3131bd;
+  color: $color2;
+  border-width: 0px;
+  padding: 7px 20px;
+  cursor: pointer;
+}
+
+.btn-container {
+  margin: 0px auto;
+  height: 100%;
+  font-weight: 500;
+  display: $display;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.btn-container span {
+  margin: 20px 0px;
+}
+
+.header {
+  background-image: url(./assets/images/header-image.png);
+  min-height: 400px;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-top: 3em;
+  margin: auto 0px;
+  display: $display;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-details {
+  padding: 10px;
+  color: $color2;
+  font-family: sans-serif;
+  display: $display;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-details h1 {
+  font-size: 3em;
+}
+
+.header-details h4 {
+  font-size: 1.2rem;
+  max-width: 700px;
+  line-height: 2em;
+}
+
+.subject-card {
+  @extend %box-shadow;
+  margin: 20px 30px 20px 0px;
+  width: 250px;
+  border: 2px solid $color1;
+  border-radius: 15px;
+  display: $display;
+  padding: 10px 20px;
+  background-color: $color2;
+  align-items: center;
+  span {
+    padding-left: 20px;
+    font-weight: 600;
+    color: $color1;
+  }
+}
+
+.footer-icon {
+  max-width: 50px;
+  max-height: 50px;
+}
+
+.icon-column {
+  display: $display;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.footer-copyright {
+  display: $display;
+  justify-content: center;
+  color: $color1;
+  font-size: 12px;
+  padding: 20px 0px;
+}
+
+.course-container {
+  @extend %box-shadow;
+  $padding: 0px 20px;
+  $color: rgb(19, 17, 17);
+  border: 1px solid $borderColor;
+  border-radius: 20px;
+  display: $display;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  .course-intro {
+    padding: $padding;
+    color: $color;
+    padding-top: 10px;
+    border-bottom: 1px solid $borderColor;
+  }
+  .course-form {
+    padding: $padding;
+  }
+}
+
+.instructor-materials {
+  @extend %box-shadow;
+  margin-top: 1rem;
+  padding-top: 10px;
+  display: $display;
+  border: 1px solid $borderColor;
+  border-radius: 20px;
+  flex-direction: column;
+  width: 100%;
+  p {
+    max-width: 600px;
+  }
+}
+
+.form-container {
+  background-color: white;
+  padding: 20px;
+  padding-bottom: 0px;
+}
+
+.form-body {
+  padding: 20px 0px;
+  color: rgb(19, 17, 17);
+  div {
+    display: $display;
+    flex-direction: column;
+    padding-bottom: 10px;
+    label {
+      padding-bottom: 5px;
+      font-weight: 500;
+    }
+    input {
+      min-height: 1.5em;
+    }
+    .upload-button {
+      @extend %button-shared;
+      @extend %blue-button;
+      max-width: 10em;
+    }
+    textarea {
+      height: 5em;
+    }
+    .input-style {
+      max-width: 400px;
+      border-radius: 5px;
+      padding-left: 5px;
+      background-color: $borderColor;
+    }
+  }
+}
+
+.resources-container {
+  padding: 20px 0px;
+  display: $display;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  h4 {
+    font-size: 1.2rem;
+    padding: 0px 10px 5px;
+  }
+}
+
+
+@media (max-width: 450px) {
+  .row {
+    padding: 0px;
+  }
+}
+
+@media (max-width: 400px) {
+  .search-input {
+    width: 200px;
+  }
+}

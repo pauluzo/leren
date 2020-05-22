@@ -9,6 +9,7 @@ import { faHeart} from '@fortawesome/free-solid-svg-icons';
 import {faHeart as farHeart} from "@fortawesome/free-regular-svg-icons"
 import {ReactComponent as PlayIcon} from "../assets/icons/play-icon.svg";
 import { withRouter } from "react-router-dom";
+import { Nav, Container } from 'react-bootstrap';
 
 class StudentPage extends React.Component {
   constructor(props) {
@@ -34,14 +35,13 @@ class StudentPage extends React.Component {
       let storageResponse = localStorage.getItem("userData");
       let userData = JSON.parse(storageResponse);
       let favCourses = localStorage.getItem("myFavs");
+      let myFavs = favCourses ? JSON.parse(favCourses) : null;
       // Function to get this user's list of favorite subjects
-      if(favCourses) {
-        console.log(favCourses);
-        let myFavs = JSON.parse(favCourses);
+      if(myFavs) {
+        console.log(myFavs);
         resetState({myFavorites: myFavs});
       } else {
         localStorage.setItem("myFavs", JSON.stringify([]));
-        console.log("this runs: set favs in storage");
       }
       if (userData) resetState({userData: userData, userName: userData.details.name})
     }
@@ -51,14 +51,12 @@ class StudentPage extends React.Component {
       let user = list[0];
       let suggestionCourses = user.suggestion_courses;
       this.setState({suggestionCourses: suggestionCourses});
-      console.log(suggestionCourses);
-      console.log(this.state.suggestionCourses);
     })
     .catch((_) => alert("Could not load properly. Please check your connection and refresh the page"));
   }
 
   componentWillUnmount() {
-    localStorage.setItem("myFavorites", this.state.myFavorites);
+    localStorage.setItem("myFavs", JSON.stringify(this.state.myFavorites));
     console.log("this runs: component will unmount");
   }
 
@@ -67,73 +65,53 @@ class StudentPage extends React.Component {
     resetProfile({isStudent: false})
   }
 
-  handleInput = (e) => {
-    const target = e.target;
-    const name = target.name;
-    const value = target.value;
-    this.setState({
-      [name]: value
-    })
-  }
-
   handleLogout = () => {
     const history = this.props.history;
     if(history) history.goBack();
   } 
 
   handleFavorites = (isFavorite, myFavorites, nowPlaying) => {
-    console.log("this runs: favorites handle");
-    console.log(`${isFavorite} ${myFavorites.length} ${nowPlaying.toString()}`);
     const resetState = this.resetState;
     let myFavs = myFavorites;
+
     function setFavorite() {
-      console.log("this runs too: set favorites");
       let prevLength = myFavorites.length;
       let newLength = 0;
       myFavs.forEach((favCourse, index) => {
-        console.log("this runs too: for each");
         if(favCourse.id === nowPlaying.id) {
           prevLength = myFavs.length;
-          console.log(prevLength);
-          console.log(myFavs);
           myFavs.splice(index, 1);
-          console.log(myFavs);
-          console.log(newLength);
           resetState({isFavorite: !isFavorite, myFavorites: myFavs});
           return;
         } else newLength += 1;
       });
       if(prevLength === newLength) {
-        console.log(myFavs.length);
         myFavs.push(nowPlaying);
         resetState({isFavorite: !isFavorite, myFavorites: myFavs});
-        console.log(`${myFavs.length} ${prevLength} `);
       }
     }
     
     setFavorite();
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const input = this.state.searchInput
+  handleSubmit = (searchInput) => {
+    const input = searchInput.toLowerCase();
     const resetState = this.resetState;
 
     function sortCourses(users) {
-      console.log(users);
       let queryList = [];
 
       users.forEach((user) => {
         if(user.id === "abcdef00011111ghij") return;
-        let name = user.details.name;
+        let name = user.details.name.toLowerCase();
+        let username = user.details.username.toLowerCase();
         let courses = user.instructor.courses;
         //get courses based on the user
-        if(name.includes(input) || user.details.username.includes(input)) {
-          user.instructor.courses.forEach((course) => queryList.push(course));
-          console.log(queryList);
+        if(name.includes(input) || username.includes(input)) {
+          courses.forEach((course) => queryList.push(course));
         } else {
           courses.forEach((course) => {
-            if(course.course_name.includes(input) || course.category.includes(input) || course.course_description.includes(input)) {
+            if(course.course_name.toLowerCase().includes(input) || course.category.toLowerCase().includes(input) || course.course_description.includes(input)) {
               queryList.push(course);
             }
           });
@@ -145,7 +123,6 @@ class StudentPage extends React.Component {
             alert("Unfortunately, your search yielded no results :( this runss ");
             return;
           };
-          console.log(queryList);
         }
       });
       if(queryList.length > 0) {
@@ -170,7 +147,7 @@ class StudentPage extends React.Component {
       sortCourses(queryData);
     }
 
-    if(this.state.searchInput === "") {
+    if(searchInput === "") {
       alert("Your search field is empty!");
       return;
     }
@@ -183,36 +160,20 @@ class StudentPage extends React.Component {
   navContainer = () => {
     // Get the most updated list of favorites for the student
     const fetchFavorites = () => {
-      let storageResponse = localStorage.getItem("userData");
-      let userData = JSON.parse(storageResponse);
-      let favorites = userData.student.favorites;
-      console.log(favorites);
-      this.setState((prevState) => ({
-        myCourses: favorites,
-        showDropdown: !prevState.showDropdown,
-      }));
+      let favorites = this.state.myFavorites;
+      if(favorites && favorites.length > 0) {
+        this.setState((prevState) => ({
+          showDropdown: !prevState.showDropdown,
+        }));
+      } else alert("You have not added any favorite course(s)")
     }
 
     return (
-      <div className="nav-container">
-        <div className="float-left">
-          <form onSubmit={this.handleSubmit}>
-            <input 
-              type="text" placeholder="Search for a topic or instructor" 
-              onChange={this.handleInput} value={this.state.searchInput} 
-              name="searchInput" className="search-input"
-            />
-            <input
-              type="submit" value="Search" className="search-button"
-            />
-          </form>
-        </div>
-        <div className='float-right'>
-          <div><button className="nav-btn3" onClick={this.changeProfile} >Teach a course</button></div>
-          <div><button className="nav-btn2" onClick={fetchFavorites} >My Favorites</button></div>
-          <div><button className="nav-btn1" onClick={this.handleLogout} >Log Out</button></div>
-        </div>
-      </div>
+        <Nav className='ml-auto'>
+          <Nav.Link onClick={this.changeProfile} >Teach a course</Nav.Link>
+          <Nav.Link onClick={fetchFavorites} >My Favorites</Nav.Link>
+          <Nav.Link onClick={this.handleLogout} >Log Out</Nav.Link>
+        </Nav>
     );
   }
 
@@ -223,10 +184,7 @@ class StudentPage extends React.Component {
       this.setState({isFavorite: false});
     }
     favorites.splice(index, 1);
-    console.log(favorites);
-    console.log(this.state.favorites);
     this.setState({myFavorites: favorites})
-    console.log(this.state.myFavorites);
   }
 
   changeRating = (newRating) => this.setState({rating: newRating});
@@ -236,7 +194,11 @@ class StudentPage extends React.Component {
 
     return(
       <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-        <TopNav navContainer={this.navContainer}/>
+        <TopNav 
+          navContainer={this.navContainer}
+          handleSubmit={this.handleSubmit}
+          resetState={this.resetState}
+        />
         {
           showDropdown && <Dropdown 
             title={"My Favorite Courses"}
@@ -246,9 +208,9 @@ class StudentPage extends React.Component {
           />
         }
         <div className="student-page">
-        <div className="player-container">
-          <video 
-            src={url} style={{width: "640px"}}
+        <Container fluid="sm" className="player-container">
+          <video style={{width: "100%", height: "auto"}}
+            src={url}
             preload="true" loop controls autoPlay 
           />
           {
@@ -271,7 +233,9 @@ class StudentPage extends React.Component {
                     starDimension="30px"
                   />
                 </div>
-                <div style={{paddingTop: "3px"}}>
+                <div style={{paddingTop: "3px", display: "flex",
+                  alignItems: "flex-end"}}
+                >
                   <FontAwesomeIcon 
                     icon={isFavorite ? faHeart : farHeart} style={{color: "red", cursor: "pointer"}} size="2x"
                     onClick={() => this.handleFavorites(isFavorite, myFavorites, nowPlaying)}
@@ -280,14 +244,14 @@ class StudentPage extends React.Component {
               </div>
             </div>
           }
-        </div>
+        </Container>
         <div className="page-body">
           <div>
             <h2 style={{borderBottom: "1px solid grey"}}>{`Welcome, ${userName}`}</h2>
           </div>
           { searchResult ? 
             <div style={{borderBottom: "1px solid grey"}}>
-              <h4>Here are your seearch results</h4>
+              <h4>Here are your search results</h4>
             </div> : 
             <div style={{borderBottom: "1px solid grey", display: "flex", flexDirection: "column"}}>
               <h4>What to learn next?</h4>
@@ -321,10 +285,7 @@ const SuggestionsContainer = (props) => {
     handleClick = () => {
       const {courseList, index, resetState, course} = this.props;
       let suggestedCourses = courseList;
-      console.log(suggestedCourses);
-      console.log(index);
       suggestedCourses.splice(index, 1);
-      console.log(suggestedCourses);
       resetState({
         nowPlaying: course,
         url: course.link,
@@ -332,7 +293,6 @@ const SuggestionsContainer = (props) => {
         isFavorite: this.state.isFavorite,
         rating: 0,
       });
-      console.log(suggestedCourses)
     }
 
     changeRating = (_) => alert("You have to watch a video to set a rating or add to favorites");
@@ -347,7 +307,7 @@ const SuggestionsContainer = (props) => {
         </div>
         <div className="card-body">
           <div className="user-image">
-            <img src={course.user_image} alt="Instructor-img"/>
+            <img src={course.user_image} alt="img"/>
           </div>
           <div className="course-details">
             <div className="course-title">

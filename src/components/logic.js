@@ -25,7 +25,6 @@ export async function createUser (userData, isInstructor) {
   newData["instructor"] = {
     "courses": []
   }
-  console.log(newData);
   const sentData = await postRequest(newData);
   return sentData;
 }
@@ -34,16 +33,13 @@ export function addUserVideo(userData, videoData, courseDetails) {
   async function addToSuggestion(course) {
     getRequest("abcdef00011111ghij")
     .then((list) => {
-      console.log("this runs");
       let courses = [];
       let suggestionObject = list[0];
-      console.log(suggestionObject);
       courses = suggestionObject.suggestion_courses;
       courses.push(course);
-      console.log(courses)
       suggestionObject.suggestion_courses = courses;
       putRequest(suggestionObject.id, suggestionObject)
-      .then((resp) => console.log(resp))
+      .then((_) => {return;})
       .catch((error) => console.log(`This returns an error: ${error}`));
     })
     .catch((error) => console.log(`this doesnt return suggestion object ${error}`));
@@ -64,7 +60,6 @@ export function addUserVideo(userData, videoData, courseDetails) {
   data.instructor.courses.push(newCourse);
   putRequest(data.id, data)
   .then((response) => {
-    console.log(response);
     localStorage.setItem("userData", JSON.stringify(response));
   })
   .catch((error) => console.log(error));

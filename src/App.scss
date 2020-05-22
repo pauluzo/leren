@@ -70,7 +70,7 @@ $shadowColor: rgb(190, 201, 209);
 }
 
 .dropdown-container {
-  margin-top: 3em;
+  margin-top: 3.6rem;
   background-color: $color2;
   color: black;
   width: 60%;
@@ -169,21 +169,6 @@ $shadowColor: rgb(190, 201, 209);
     align-items: center;
     form {
       display: flex;
-      .search-input {
-        width: 250px;
-        background-color: inherit;
-        font-size: 15px;
-        border-radius: 10px;
-        padding-left: 5px;
-      }
-      
-      .search-button {
-        border-color: $color1;
-        cursor: pointer;
-        margin-left: 10px;
-        font-size: 15px;
-        height: 30px;
-      }
     }
   }
 }
@@ -278,24 +263,6 @@ $shadowColor: rgb(190, 201, 209);
   display: $display;
   flex-wrap: wrap;
 
-}
-
-.subject-card {
-  @extend %box-shadow;
-  margin: 20px 30px 20px 0px;
-  width: 200px;
-  height: 50px;
-  border: 2px solid $color3;
-  border-radius: 15px;
-  display: $display;
-  padding: 10px 20px;
-  background-color: $color2;
-  align-items: center;
-  span {
-    padding-left: 20px;
-    font-weight: 600;
-    color: $color3;
-  }
 }
 
 .footer_outer_container {
@@ -443,42 +410,6 @@ $shadowColor: rgb(190, 201, 209);
   align-items: center;
 }
 
-.course-container {
-  @extend %box-shadow;
-  $padding: 0px 20px;
-  $color: rgb(19, 17, 17);
-  border: 1px solid $borderColor;
-  border-radius: 20px;
-  display: $display;
-  flex-direction: column;
-  width: 100%;
-  .course-intro {
-    padding: $padding;
-    color: $color;
-    border-bottom: 1px solid $borderColor;
-  }
-  .course-form {
-    padding: $padding;
-  }
-}
-
-.form-container {
-  min-width: 350px;
-  min-height: 300px;
-  padding: 0px 20px;
-  background-color: white;
-  flex-direction: column;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 20px;
-  border: 1px solid $borderColor;
-  form {
-    width: 100%;
-    height: 100%;
-  }
-}
-
 .backDrop {
   position: fixed;
   height: 100%;
@@ -490,45 +421,6 @@ $shadowColor: rgb(190, 201, 209);
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.form-body {
-  padding: 20px 0px;
-  color: rgb(19, 17, 17);
-  div {
-    display: $display;
-    flex-direction: column;
-    padding-bottom: 10px;
-    label {
-      padding-bottom: 5px;
-      font-weight: 500;
-    }
-    input {
-      min-height: 1.5em;
-    }
-    .upload-button {
-      @extend %button-shared;
-      @extend %blue-button;
-      max-width: 10em;
-    }
-    textarea {
-      height: 5em;
-    }
-    .input-style {
-      max-width: 400px;
-      border-radius: 5px;
-      padding-left: 5px;
-      background-color: $borderColor;
-    }
-  }
-}
-
-.resources-container {
-  padding: 10px 0px;
-  display: $display;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
 }
 
 .material-container {

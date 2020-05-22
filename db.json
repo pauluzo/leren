@@ -1,0 +1,52 @@
+{
+  "users": [
+    {
+      "id": "abcdef00011111ghij",
+      "suggestion_courses": [
+        {
+          "course_name": "PWAs in React",
+          "course_description": "A comprehensive  understanding to how PWAs work in React",
+          "category": "React, PWA",
+          "link": "http://res.cloudinary.com/paulo/video/upload/v1590092249/gd6b0ltyuizizmosflxr.mp4",
+          "thumbnail": "https://res.cloudinary.com/paulo/video/upload/c_limit,h_60,w_90/v1590092249/gd6b0ltyuizizmosflxr.jpg",
+          "rating": 0,
+          "favorites": 0,
+          "id": "8297a636ddf5303d9bddc9503bbfcb80b7233868",
+          "user_image": "https://lh5.googleusercontent.com/-qf9l2YEYFZ4/AAAAAAAAAAI/AAAAAAAAAAA/AAKWJJOF3oY4vCLRB3DBuHhrs5kzzPdBAw/s96-c/photo.jpg",
+          "user_name": "Paul Okafor"
+        }
+      ]
+    },
+    {
+      "isInstructor": "false",
+      "isStudent": "true",
+      "id": "115094120654715411593",
+      "details": {
+        "name": "Paul Okafor",
+        "password": "suokafor",
+        "email": "okaforpaul26@gmail.com",
+        "username": "PaulUzo",
+        "image": "https://lh5.googleusercontent.com/-qf9l2YEYFZ4/AAAAAAAAAAI/AAAAAAAAAAA/AAKWJJOF3oY4vCLRB3DBuHhrs5kzzPdBAw/s96-c/photo.jpg"
+      },
+      "student": {
+        "favorites": []
+      },
+      "instructor": {
+        "courses": [
+          {
+            "course_name": "PWAs in React",
+            "course_description": "A comprehensive  understanding to how PWAs work in React",
+            "category": "React, PWA",
+            "link": "http://res.cloudinary.com/paulo/video/upload/v1590092249/gd6b0ltyuizizmosflxr.mp4",
+            "thumbnail": "https://res.cloudinary.com/paulo/video/upload/c_limit,h_60,w_90/v1590092249/gd6b0ltyuizizmosflxr.jpg",
+            "rating": 0,
+            "favorites": 0,
+            "id": "8297a636ddf5303d9bddc9503bbfcb80b7233868",
+            "user_image": "https://lh5.googleusercontent.com/-qf9l2YEYFZ4/AAAAAAAAAAI/AAAAAAAAAAA/AAKWJJOF3oY4vCLRB3DBuHhrs5kzzPdBAw/s96-c/photo.jpg",
+            "user_name": "Paul Okafor"
+          }
+        ]
+      }
+    }
+  ]
+}

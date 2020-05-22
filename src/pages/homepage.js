@@ -1,7 +1,9 @@
 import React from "react";
-import { GoogleLogin, } from 'react-google-login';
+import "../Apps.css";
+import { GoogleLogin } from 'react-google-login';
 import {withRouter} from "react-router-dom";
 import {CloseButton} from "../components/Reusable";
+import {Container, Nav, Row, Col, Image} from "react-bootstrap";
 
 import {TopNav, Category, Footer} from "../components/Reusable";
 import {createUser} from "../components/logic";
@@ -27,11 +29,11 @@ class HomePage extends React.Component {
     }
     
     return (
-      <div className='float-right'>
-        <div><button className="nav-btn3" onClick={() => onClick("signup", true)} >Become an Instructor</button></div>
-        <div><button className="nav-btn2" onClick={() => onClick("login", false)} >Log In</button></div>
-        <div><button className="nav-btn1" onClick={() => onClick("signup", false)} >Sign Up</button></div>
-      </div>
+      <Nav className='ml-auto'>
+        <Nav.Link onClick={() => onClick("signup", true)} >Become an Instructor</Nav.Link>
+        <Nav.Link onClick={() => onClick("login", false)} >Log In</Nav.Link>
+        <Nav.Link onClick={() => onClick("signup", false)} >Sign Up</Nav.Link>
+      </Nav>
     );
   }
 
@@ -55,46 +57,54 @@ class HomePage extends React.Component {
             </h4>
           </div>
         </div>
-        <div className="home-intro">
-          <div className="intro-left">
-            <div>
-              <span>Become a Student</span>
-              <button 
-                onClick={() => {
-                  this.resetState({isLoggedin: true, buttonType: "signup", isInstructor: false});
-                }}
-              >
-                Sign Up
-              </button>
-            </div>
-            <img alt="img1" src={HomeImage1} />
-          </div>
-          <div className="intro-right">
-            Becoming a student gives you access to millions of videos from instructors
-            all over the world, interactive sessions with instructors and fellow 
-            students. Build your expertise, and become an instructor as well.
-          </div>
-        </div>
-        <div className="home-intro">
-          <div className="intro-right">
-            Being an instructor entails access to videos uploaded by other instructors,
-            thereby giving you the option to learn, while teaching others. Get amazing opportunities for
-            growth and experience.
-          </div>
-          <div className="intro-left">
-            <div>
-              <span>Become an instructor</span>
-              <button
-                onClick={() => {
-                  this.resetState({isLoggedin: true, buttonType: "signup", isInstructor: true});
-                }}
-              >
-                Register
-              </button>
-            </div>
-            <img alt="img2" src={HomeImage2} />
-          </div>
-        </div>
+        <Container fluid style={{marginBottom: "10px"}}>
+          <Row className="row" >
+            <Col className="column" xs={12} sm={12} lg={6}>
+              <div>
+                <Image src={HomeImage1} fluid />
+              </div>
+              <div className="btn-container">
+                <span>Become a Student</span>
+                <button className="col-btn" 
+                  onClick={() => {
+                    this.resetState({isLoggedin: true, buttonType: "signup", isInstructor: false});
+                  }}
+                >
+                  Sign Up
+                </button>
+              </div>
+            </Col>
+            <Col className="home-text-col" xs={12} sm={12} lg={6} >
+              Becoming a student gives you access to millions of videos from instructors
+              all over the world, interactive sessions with instructors and fellow 
+              students. Build your expertise, and become an instructor as well.
+            </Col>
+          </Row>
+        </Container>
+        <Container fluid style={{marginBottom: "10px"}}>
+          <Row className="row">
+            <Col className="home-text-col" xs={12} sm={12} lg={6}>
+              Being an instructor entails access to videos uploaded by other instructors,
+              thereby giving you the option to learn, while teaching others. Get amazing opportunities for
+              growth and experience.
+            </Col>
+            <Col className="column" xs={12} sm={12} lg={6}>
+              <div className="btn-container">
+                <span>Become an instructor</span>
+                <button className="col-btn"
+                  onClick={() => {
+                    this.resetState({isLoggedin: true, buttonType: "signup", isInstructor: true});
+                  }}
+                >
+                  Register
+                </button>
+              </div>
+              <div>
+                <Image src={HomeImage2} fluid />
+              </div>
+            </Col>
+          </Row>
+        </Container>
         <Category/>
         <Footer/>
       </div>
@@ -137,7 +147,6 @@ const BackDrop = props => {
       }
       userData.username = username;
       userData.password = password;
-      console.log(`${userData.username} ${userData.password}`);
 
       this.setState({
         username: "",
@@ -160,16 +169,13 @@ const BackDrop = props => {
     responseGoogle = response => {
       const profile = isInstructor ? "instructor" : "student";
       userData.googleCred = response.profileObj;
-      console.log(userData);
       function getUserData () {
         createUser(userData, isInstructor)
         .then((data) => {
-          console.log(data);
           localStorage.setItem("userData", JSON.stringify(data));
           if(history) history.push("/profile", `${profile}`);
         })
         .catch((error) => {
-          console.log(error);
           alert("This user already exist.");
         })
       }
@@ -259,9 +265,7 @@ const BackDrop = props => {
         return;
       }
       const response = await getRequest(email);
-      console.log(response);
       if(response) {
-        console.log("this runs");
         
         if(response.length < 1) {
           alert("The credentials you entered are incorrect! Please check.");
@@ -269,13 +273,10 @@ const BackDrop = props => {
         }
         response.forEach((user) => {
           if(user.details.email === email && user.details.password === password) {
-            console.log("this runs");
             localStorage.setItem("userData", JSON.stringify(user));
             if(user.isInstructor) {
-              console.log("instructor");
               history.push("/profile", "instructor");
             } else if(user.isStudent) {
-              console.log("student");
               history.push("/profile", "student");
             }
             return;

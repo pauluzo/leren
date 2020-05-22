@@ -1,0 +1,241 @@
+.instructor-materials, .course-container, .subject-card {
+  -webkit-box-shadow: 10px 11px 5px -4px #bec9d1;
+  -moz-box-shadow: 10px 11px 5px -4px #bec9d1;
+  box-shadow: 10px 11px 5px -4px #bec9d1;
+}
+
+.form-body div .upload-button {
+  padding: 7px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.form-body div .upload-button {
+  border-radius: 10px;
+  background-color: #3131bd;
+  color: white;
+  border-width: 0px;
+}
+
+.row {
+  padding: 10px 20px;
+  background-color: white;
+}
+
+.column {
+  display: flex;
+  align-items: center;
+}
+
+.search-nav {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-input {
+  width: 250px;
+  background-color: whitesmoke;
+  font-size: 15px;
+  border-radius: 10px;
+  padding-left: 5px;
+}
+
+.search-button {
+  border-color: #3131bd;
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: 15px;
+  height: 30px;
+}
+
+.home-text-col {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  line-height: 1.8em;
+  padding-top: 10px;
+}
+
+.col-btn {
+  margin: 20px 0px;
+  border-radius: 10px;
+  background-color: #3131bd;
+  color: white;
+  border-width: 0px;
+  padding: 7px 20px;
+  cursor: pointer;
+}
+
+.btn-container {
+  margin: 0px auto;
+  height: 100%;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.btn-container span {
+  margin: 20px 0px;
+}
+
+.header {
+  background-image: url(./assets/images/header-image.png);
+  min-height: 400px;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-top: 3em;
+  margin: auto 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-details {
+  padding: 10px;
+  color: white;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-details h1 {
+  font-size: 3em;
+}
+
+.header-details h4 {
+  font-size: 1.2rem;
+  max-width: 700px;
+  line-height: 2em;
+}
+
+.subject-card {
+  margin: 20px 30px 20px 0px;
+  width: 250px;
+  border: 2px solid #3131bd;
+  border-radius: 15px;
+  display: flex;
+  padding: 10px 20px;
+  background-color: white;
+  align-items: center;
+}
+.subject-card span {
+  padding-left: 20px;
+  font-weight: 600;
+  color: #3131bd;
+}
+
+.footer-icon {
+  max-width: 50px;
+  max-height: 50px;
+}
+
+.icon-column {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.footer-copyright {
+  display: flex;
+  justify-content: center;
+  color: #3131bd;
+  font-size: 12px;
+  padding: 20px 0px;
+}
+
+.course-container {
+  border: 1px solid gainsboro;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+.course-container .course-intro {
+  padding: 0px 20px;
+  color: #131111;
+  padding-top: 10px;
+  border-bottom: 1px solid gainsboro;
+}
+.course-container .course-form {
+  padding: 0px 20px;
+}
+
+.instructor-materials {
+  margin-top: 1rem;
+  padding-top: 10px;
+  display: flex;
+  border: 1px solid gainsboro;
+  border-radius: 20px;
+  flex-direction: column;
+  width: 100%;
+}
+.instructor-materials p {
+  max-width: 600px;
+}
+
+.form-container {
+  background-color: white;
+  padding: 20px;
+  padding-bottom: 0px;
+}
+
+.form-body {
+  padding: 20px 0px;
+  color: #131111;
+}
+.form-body div {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+}
+.form-body div label {
+  padding-bottom: 5px;
+  font-weight: 500;
+}
+.form-body div input {
+  min-height: 1.5em;
+}
+.form-body div .upload-button {
+  max-width: 10em;
+}
+.form-body div textarea {
+  height: 5em;
+}
+.form-body div .input-style {
+  max-width: 400px;
+  border-radius: 5px;
+  padding-left: 5px;
+  background-color: gainsboro;
+}
+
+.resources-container {
+  padding: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.resources-container h4 {
+  font-size: 1.2rem;
+  padding: 0px 10px 5px;
+}
+
+@media (max-width: 450px) {
+  .row {
+    padding: 0px;
+  }
+}
+@media (max-width: 400px) {
+  .search-input {
+    width: 200px;
+  }
+}
+
+/*# sourceMappingURL=Apps.css.map */

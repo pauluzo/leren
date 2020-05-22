@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Logo from "../assets/images/logo.png";
+import {Navbar, Container, Row, Col, Image, } from "react-bootstrap";
 
 //React allows to import svg as a component.
 import {ReactComponent as BusinessIcon} from "../assets/icons/business-icon.svg";
@@ -16,14 +17,84 @@ import Twitter from "../assets/images/twitter_logo.png";
 import LinkedIn from "../assets/images/linkedin_logo.png";
 
 // Reusable Top Navigtion component 
-function TopNav (props) {
-  const NavContainer = props.navContainer;
-  return(
-    <div className="topnav">
-      <img src={Logo} alt="Logo" style={{height: "2em", width: "4.5em", marginRight: "20px"}}/>
-      <NavContainer/>
-    </div>
-  );
+class TopNav extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: "",
+      width: 0,
+      height: 0,
+    }
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+  }
+
+  componentDidMount() {
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+
+  updateWindowDimensions() {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
+  }
+
+  navContainer = this.props.navContainer;
+  resetState = this.props.resetState;
+  handleSubmit = this.props.handleSubmit;
+  submit = (e) => {
+    e.preventDefault();
+    this.handleSubmit(this.state.input);
+    this.setState({input: ""});
+  }
+
+  searchContainer = () => {
+    return (
+      <div className="mr-auto">
+        <form onSubmit={this.submit}>
+          <input 
+            type="text" placeholder="Search for a topic or instructor" 
+            onChange={this.handleInput} value={this.state.input} 
+            name="input" className="search-input"
+          />
+          <input
+            type="submit" value="Search" className="search-button"
+          />
+        </form>
+      </div>
+    )
+  }
+
+  handleInput = (e) => {
+    const target = e.target;
+    const name = target.name;
+    const value = target.value;
+    this.setState({
+      [name] : value
+    })
+    this.resetState({searchInput: this.state.input});
+  }
+
+  render() {
+    const SearchContainer = this.searchContainer;
+    const NavContainer = this.props.navContainer;
+    return(
+      <Navbar fixed="top" collapseOnSelect expand="lg" variant="dark" style={{backgroundColor: "rgb(87, 29, 126)"}}>
+        { !(this.handleSubmit && this.state.width < 560) && 
+          <Navbar.Brand href="#home">
+            <img src={Logo} alt="Logo" />
+          </Navbar.Brand>
+        }
+        {this.handleSubmit && <SearchContainer/>}
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <NavContainer/>
+        </Navbar.Collapse>
+      </Navbar>
+    );
+  }
 }
 
 function Category() {
@@ -53,7 +124,7 @@ function SubjectCard (props, index) {
   let Icon = props.icon
   return (
     <div className="subject-card"  key={index}>
-      <Icon style={{width: "2.5em", height: "2.5em"}} />
+      <Icon style={{width: "3.5rem", height: "3.5rem"}} />
       <span>{props.title}</span>
     </div>
   );
@@ -61,32 +132,29 @@ function SubjectCard (props, index) {
 
 const Footer = () => {
   return(
-    <div className='footer_outer_container'>
-      <div className="logo-icon">
-        <LogoIcon style={{height: "100px", width: "200px"}}/>
-      </div>
-      <div className='footer_inner_container'>
-        <a target='_blank' rel='noopener noreferrer' href='https://www.github.com/pauluzo'><img src={Github} alt='github'></img></a>
-        <a target='_blank' rel='noopener noreferrer' href='https://twitter.com/papizone'><img src={Twitter} alt='twitter'></img></a>
-        <a target='_blank' rel='noopener noreferrer' href='https://www.linkedin.com/in/paul-okafor-b51ab01a2/'><img src={LinkedIn} alt='linkedIn'></img></a>
-        <a target='_blank' rel='noopener noreferrer' href='mailto:okaforpaul26@gmail.com'><img src={Gmail} alt='gmail'></img></a>
-        <div className="copyright">
+    <Container fluid>
+      <Row>
+        <Col xs="12" sm="4">
+          <LogoIcon style={{height: "100px", width: "200px"}}/>
+        </Col>
+        <Col className="icon-column" xs="12" sm="8">
+          <a target='_blank' rel='noopener noreferrer' href='https://www.github.com/pauluzo'><Image className="footer-icon" src={Github} alt='github' fluid /></a>
+          <a target='_blank' rel='noopener noreferrer' href='https://twitter.com/papizone'><Image className="footer-icon" src={Twitter} alt='twitter' fluid /></a>
+          <a target='_blank' rel='noopener noreferrer' href='https://www.linkedin.com/in/paul-okafor-b51ab01a2/'><Image className="footer-icon" src={LinkedIn} alt='linkedIn' /></a>
+          <a target='_blank' rel='noopener noreferrer' href='mailto:okaforpaul26@gmail.com'><Image className="footer-icon" src={Gmail} alt='gmail' fluid /></a>
+        </Col>
+      </Row>
+      <Row>
+        <Col className="footer-copyright">
           <span>Copyright 2020 Leren Inc. All rights reserved</span>
-        </div>
-      </div>
-    </div>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
 const Dropdown = (props) => {
-  useEffect(() => {
-    console.log("this runs onLoad");
-  })
-
   const ListTiles = (props) => {
-    if(props.listData.length < 1) {
-      alert("You list is empty");
-    }
     const getTiles = () => props.listData.map((courseData, index) => {
       return ListTile(courseData, index, props.closable);
     });
@@ -95,7 +163,6 @@ const Dropdown = (props) => {
     return tiles;
   }
 
-  console.log(props);
   return(
     <div className="dropdown-container">
       <div className="title">
