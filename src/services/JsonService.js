@@ -7,10 +7,18 @@ export async function getRequest(searchQuery) {
     myUrl = `${myUrl}?q=${searchQuery}`;
   }
 
-  const userResponse = await axios.get(myUrl);
-  const response = userResponse.data;
-  console.log(response);
-  return response; 
+  try {
+    const userResponse = await axios.get(myUrl);
+    const response = userResponse.data;
+    console.log(response);
+    return response; 
+  } catch (error) {
+    console.log(`This is the error: ${error}`);
+    let err = {
+      error: error,
+    }
+    return err;
+  }
 }
 
 export async function postRequest(newData) {

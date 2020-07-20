@@ -30,21 +30,29 @@ export async function fetchPhotos(imageTag, setter) {
   });
 }
 
-export const beginUpload = (tag, userData, videoDetails) => {
+export function beginUpload (tag, callback, userData, videoDetails) {
   const uploadOptions = {
     cloudName: "paulo",
     tags: [tag],
     uploadPreset: "okaforpaul26",
   };
 
-  openUploadWidget(uploadOptions, (error, videoData) => {
+  let callbackData;
+
+  openUploadWidget(uploadOptions, (error, uploadData) => {
     if(!error) {
-      if(videoData.event === "success") {
-        addUserVideo(userData, videoData.info, videoDetails);
+      if(uploadData.event === "success" && tag === "videos") {
+        addUserVideo(userData, uploadData.info, videoDetails);
+        callbackData = {event: "success"}
+        callback(callbackData);
+      } else if(uploadData.event === "success" && tag === "images") {
+        callbackData = {info: uploadData.info}
+        callback(callbackData);
       }
     } else {
       console.log(error);
-      alert(`Could not upload video successfully. Please try again.`)
+      callbackData = {error: error};
+      callback(callbackData);
     }
   })
 }

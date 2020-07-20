@@ -1,11 +1,13 @@
 import React from 'react';
 import {beginUpload} from "../services/CloudinaryService";
 import {putRequest, getRequest} from "../services/JsonService";
-import {TopNav, Dropdown} from "../components/Reusable";
+import {TopNav, Dropdown, Footer} from "../components/Reusable";
 import {ReactComponent as CourseIcon1} from "../assets/icons/course1-icon.svg";
 import {ReactComponent as CourseIcon2} from "../assets/icons/course2-icon.svg";
 import { withRouter } from 'react-router-dom';
 import { Nav, Container, Row, Col } from 'react-bootstrap';
+import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
+
 
 class InstructorPage extends React.Component {
   constructor(props) {
@@ -14,8 +16,10 @@ class InstructorPage extends React.Component {
       courseName: '',
       courseDescription: '',
       category: '',
+      coverImage: '',
       showDropdown: false,
       myCourses: [],
+      isImageUploaded: false,
     }
   }
 
@@ -51,7 +55,7 @@ class InstructorPage extends React.Component {
           myCourses: courses,
           showDropdown: !prevState.showDropdown,
         }));
-      } else alert("You don't seem to have any courses uploaded, yet.")
+      } else ToastsStore.info("You do not seem to have any courses uploaded, yet.")
     }
 
     return (
@@ -73,7 +77,7 @@ class InstructorPage extends React.Component {
     putRequest(userData.id, userData)
     .then((resp) => {
       localStorage.setItem("userData", JSON.stringify(resp));
-      alert("Update has been saved successfully!");
+      ToastsStore.success("Update has been saved successfully!");
     });
     getRequest("abcdef00011111ghij")
     .then((resp) => {
@@ -92,8 +96,20 @@ class InstructorPage extends React.Component {
     })
   }
 
+  handleImageUpload = () => {
+    beginUpload("images", (response) => {
+      console.log(response);
+      if(response.error) ToastsStore.error(`Could not upload image successfully. Error: ${response.error}`);
+      else if (response.info) {
+        ToastsStore.success("Cover image was uploaded successfully");
+        this.setState({isImageUploaded: true, coverImage: response.info.url});
+        console.log(response.info);
+      }
+    })
+  }
+
   handleSubmit = () => {
-    const {courseName, courseDescription, category} = this.state;
+    const {courseName, courseDescription, category, coverImage} = this.state;
     // Function to ensure that an updated version of the userData is passed
     function getUserData() {
       let storageResponse = localStorage.getItem("userData");
@@ -101,29 +117,39 @@ class InstructorPage extends React.Component {
       return userData;
     }
 
+    function callback(response) {
+      if(response.error) ToastsStore.error("Could not upload course video successfully. Please try again.");
+      else if(response.event === "success") ToastsStore.success("Course video was uploaded successfully.");
+    }
+
     if(courseName === "" || courseDescription === "") {
-      alert("The course name and description must be filled correctly!");
+      ToastsStore.error("The course name and description must be filled correctly!");
+      return;
+    } else if(coverImage === "") {
+      ToastsStore.error("The cover image has not been uploaded");
       return;
     }
     let videoDetails = {};
     videoDetails["name"] = courseName;
     videoDetails["description"] = courseDescription;
     videoDetails["category"] = category;
+    videoDetails["coverImage"] = coverImage;
     this.setState({
       courseName: "",
       courseDescription: "",
       category: "",
     })
-    beginUpload("videos", getUserData(), videoDetails);
+    beginUpload("videos", callback, getUserData(), videoDetails);
   }
 
   resetState = (newState) => this.setState(newState);
 
   render() {
-    const {courseName, courseDescription, category, myCourses, showDropdown} = this.state;
+    const {courseName, courseDescription, category, myCourses, showDropdown, isImageUploaded} = this.state;
     
     return(
       <div className="instructor-page">
+        <ToastsContainer position={ToastsContainerPosition.TOP_LEFT} store={ToastsStore}/>
         <TopNav navContainer={this.navContainer}/>
         {
           showDropdown && <Dropdown 
@@ -163,6 +189,17 @@ class InstructorPage extends React.Component {
                   <input className="input-style"
                     type="text" value={category} onChange={this.handleInput}
                     placeholder="e.g. React, JavaScript" name="category"
+                  />
+                </div>
+                <div>
+                  <label>Upload Cover Image</label>
+                  <input className="upload-button"
+                    onClick={ isImageUploaded ? null : (e) => {
+                      e.preventDefault();
+                      this.handleImageUpload();
+                    }}
+                    type="button"
+                    value={isImageUploaded ? "Image Uploaded" : "Upload Image"}
                   />
                 </div>
                 <div>
@@ -208,6 +245,9 @@ class InstructorPage extends React.Component {
               </Col>
             </Row>
           </Container>
+          <div style={{marginTop: "20px", width: "100%"}}>
+            <Footer/>
+          </div>
         </div>
       </div>
     );

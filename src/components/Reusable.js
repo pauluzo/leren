@@ -81,7 +81,7 @@ class TopNav extends React.Component {
     const SearchContainer = this.searchContainer;
     const NavContainer = this.props.navContainer;
     return(
-      <Navbar fixed="top" collapseOnSelect expand="lg" variant="dark" style={{backgroundColor: "rgb(87, 29, 126)"}}>
+      <Navbar fixed="top" collapseOnSelect expand="lg" variant="dark" style={{backgroundColor: "rgb(61, 15, 134)"}}>
         { !(this.handleSubmit && this.state.width < 560) && 
           <Navbar.Brand href="#home">
             <img src={Logo} alt="Logo" />

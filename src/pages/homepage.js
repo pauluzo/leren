@@ -4,6 +4,7 @@ import { GoogleLogin } from 'react-google-login';
 import {withRouter} from "react-router-dom";
 import {CloseButton} from "../components/Reusable";
 import {Container, Nav, Row, Col, Image} from "react-bootstrap";
+import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 
 import {TopNav, Category, Footer} from "../components/Reusable";
 import {createUser} from "../components/logic";
@@ -45,16 +46,25 @@ class HomePage extends React.Component {
 
     return(
       <div className="homepage">
+        <ToastsContainer position={ToastsContainerPosition.TOP_LEFT} store={ToastsStore}/>
         {isLoggedin && <BackDrop isInstructor={isInstructor} buttonType={buttonType} history={history} resetState={this.resetState}/>}
         <TopNav
           navContainer={() => this.navContainer(this.isLoggedin, this.resetState)}
         />
         <div className="header">
           <div className="header-details">
-            <h1>Learn Anything</h1>
-            <h4>
+            <h1 style={{fontSize: "5em"}}>Accelerate your career!</h1>
+            <h4 style={{fontSize: "2em"}}>
               Gain access to online courses, instructors, certificates and degrees from world-class tutors and organisations.
             </h4>
+            <button className="col-btn" 
+              style={{fontSize: "1.2em", backgroundColor: "rgb(90, 38, 211)"}}
+              onClick={() => {
+                this.resetState({isLoggedin: true, buttonType: "signup", isInstructor: false});
+              }}
+            >
+              Get Started
+            </button>
           </div>
         </div>
         <Container fluid style={{marginBottom: "10px"}}>
@@ -136,13 +146,13 @@ const BackDrop = props => {
     handleSignup = () => {
       const {username, password, re_password} = this.state;
       if(username === "" || password === "") {
-        alert("Username and Password must not be empty");
+        ToastsStore.error("Username and Password must not be empty");
         return;
       } else if(password.length < 8) {
-        alert("Password must contain a minimum of 8 characters");
+        ToastsStore.error("Password must contain a minimum of 8 characters");
         return;
       } else if(password !== re_password) {
-        alert("The initial password and re-entered password do not match! Check your values and try again");
+        ToastsStore.error("The initial password and re-entered password do not match! Check your values and try again");
         return;
       }
       userData.username = username;
@@ -176,7 +186,7 @@ const BackDrop = props => {
           if(history) history.push("/profile", `${profile}`);
         })
         .catch((error) => {
-          alert("This user already exist.");
+          ToastsStore.error("This user already exist.");
         })
       }
       getUserData();
@@ -194,7 +204,7 @@ const BackDrop = props => {
                 clientId="644395597963-2o1pb5pe1k1eo9nrhij9acpkrugf2b75.apps.googleusercontent.com"
                 buttonText="Sign Up"
                 onSuccess={this.responseGoogle}
-                onFailure={(response) => alert(`Google sign up failed! ${response.error}`)}
+                onFailure={(response) => ToastsStore.error(`Google sign up failed! ${response.error}`)}
                 cookiePolicy={'single_host_origin'}
               />
             </div>
@@ -253,22 +263,25 @@ const BackDrop = props => {
       this.state = {
         password: "",
         email: "",
+        loading: false
       }
     }
 
     // Function to handle the login process
     handleLogin = async () => {
+      this.setState({loading: true});
       const {password, email} = this.state;
 
       if(password === "" || email === "") {
-        alert("Error! Your input fields are not properly filled ");
+        ToastsStore.error("Error! Your input fields are not properly filled ");
+        this.setState({loading: false});
         return;
       }
       const response = await getRequest(email);
-      if(response) {
-        
+      if(!response.error) {
         if(response.length < 1) {
-          alert("The credentials you entered are incorrect! Please check.");
+          ToastsStore.error("The credentials you entered are incorrect! Please check.");
+          this.setState({loading: false});
           return;
         }
         response.forEach((user) => {
@@ -280,8 +293,14 @@ const BackDrop = props => {
               history.push("/profile", "student");
             }
             return;
-          } else alert("The credentials you entered are incorrect! Please check.");
+          } else {
+            this.setState({loading: false});
+            ToastsStore.error("The credentials you entered are incorrect! Please check.");
+          }
         });
+      } else {
+        this.setState({loading: false});
+        ToastsStore.error(`An error occured, ${response.error}`);
       }
     }
 
@@ -296,11 +315,11 @@ const BackDrop = props => {
     }
 
     render() {
-      const {email, password} = this.state;
+      const {email, password, loading} = this.state;
       return (
         <form className="form-body">
           <div>
-            <label>Enter your email</label>
+            <label>Email</label>
             <input className="input-style"
               type="text" placeholder="enter your registered email."
               value={email} name="email" onChange={this.handleInput}
@@ -317,8 +336,8 @@ const BackDrop = props => {
           </div>
           <div>
             <input className="upload-button"
-              onClick={this.handleLogin}
-              type="button" value="Log In"
+              onClick={loading ? null : this.handleLogin}
+              type="button" value={loading ? "Loading..." : "Log In"} 
             />
           </div>
         </form>
@@ -330,7 +349,7 @@ const BackDrop = props => {
     <div className='backDrop'>
       <div className="form-container">
         <div style={{display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%"}}>
-          <h4>Enter your details in the form below</h4>
+          <h4>Enter your details below</h4>
           <CloseButton onClick={() => props.resetState({isLoggedin: false})}/>
         </div>
         {

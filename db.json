@@ -8,10 +8,22 @@
           "course_description": "A comprehensive  understanding to how PWAs work in React",
           "category": "React, PWA",
           "link": "http://res.cloudinary.com/paulo/video/upload/v1590092249/gd6b0ltyuizizmosflxr.mp4",
-          "thumbnail": "https://res.cloudinary.com/paulo/video/upload/c_limit,h_60,w_90/v1590092249/gd6b0ltyuizizmosflxr.jpg",
+          "cover_image": "http://res.cloudinary.com/paulo/image/upload/v1594592666/xzczc5seuy96zxrffp9t.jpg",
           "rating": 0,
           "favorites": 0,
           "id": "8297a636ddf5303d9bddc9503bbfcb80b7233868",
+          "user_image": "https://lh5.googleusercontent.com/-qf9l2YEYFZ4/AAAAAAAAAAI/AAAAAAAAAAA/AAKWJJOF3oY4vCLRB3DBuHhrs5kzzPdBAw/s96-c/photo.jpg",
+          "user_name": "Paul Okafor"
+        },
+        {
+          "course_name": "Intro to React",
+          "course_description": "A comprehensive Understanding of how react works.",
+          "category": "React, JavaScript",
+          "link": "http://res.cloudinary.com/paulo/video/upload/v1594592807/qimezeaytm6wpidcxff9.mp4",
+          "cover_image": "http://res.cloudinary.com/paulo/image/upload/v1594592666/xzczc5seuy96zxrffp9t.jpg",
+          "rating": 0,
+          "favorites": 0,
+          "id": "5bd1f9974de8d0d8e6401d829f00d1bdc094af99",
           "user_image": "https://lh5.googleusercontent.com/-qf9l2YEYFZ4/AAAAAAAAAAI/AAAAAAAAAAA/AAKWJJOF3oY4vCLRB3DBuHhrs5kzzPdBAw/s96-c/photo.jpg",
           "user_name": "Paul Okafor"
         }
@@ -42,6 +54,18 @@
             "rating": 0,
             "favorites": 0,
             "id": "8297a636ddf5303d9bddc9503bbfcb80b7233868",
+            "user_image": "https://lh5.googleusercontent.com/-qf9l2YEYFZ4/AAAAAAAAAAI/AAAAAAAAAAA/AAKWJJOF3oY4vCLRB3DBuHhrs5kzzPdBAw/s96-c/photo.jpg",
+            "user_name": "Paul Okafor"
+          },
+          {
+            "course_name": "Intro to React",
+            "course_description": "A comprehensive Understanding of how react works.",
+            "category": "React, JavaScript",
+            "link": "http://res.cloudinary.com/paulo/video/upload/v1594592807/qimezeaytm6wpidcxff9.mp4",
+            "cover_image": "http://res.cloudinary.com/paulo/image/upload/v1594592666/xzczc5seuy96zxrffp9t.jpg",
+            "rating": 0,
+            "favorites": 0,
+            "id": "5bd1f9974de8d0d8e6401d829f00d1bdc094af99",
             "user_image": "https://lh5.googleusercontent.com/-qf9l2YEYFZ4/AAAAAAAAAAI/AAAAAAAAAAA/AAKWJJOF3oY4vCLRB3DBuHhrs5kzzPdBAw/s96-c/photo.jpg",
             "user_name": "Paul Okafor"
           }

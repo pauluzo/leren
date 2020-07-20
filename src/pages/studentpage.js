@@ -2,7 +2,6 @@ import React from "react";
 import { TopNav, Dropdown } from "../components/Reusable";
 import {getRequest} from "../services/JsonService";
 import {Category, Footer} from "../components/Reusable";
-import DefaultImage from "../assets/images/default_image.png"
 import StarRatings from "react-star-ratings";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart} from '@fortawesome/free-solid-svg-icons';
@@ -10,6 +9,7 @@ import {faHeart as farHeart} from "@fortawesome/free-regular-svg-icons"
 import {ReactComponent as PlayIcon} from "../assets/icons/play-icon.svg";
 import { withRouter } from "react-router-dom";
 import { Nav, Container } from 'react-bootstrap';
+import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 
 class StudentPage extends React.Component {
   constructor(props) {
@@ -48,11 +48,12 @@ class StudentPage extends React.Component {
     getUserData();
     getRequest("abcdef00011111ghij")
     .then((list) => {
+      console.log(list);
       let user = list[0];
       let suggestionCourses = user.suggestion_courses;
       this.setState({suggestionCourses: suggestionCourses});
     })
-    .catch((_) => alert("Could not load properly. Please check your connection and refresh the page"));
+    .catch((error) => ToastsStore.error(`Could not load properly. Please check your connection and refresh the page ${error}`));
   }
 
   componentWillUnmount() {
@@ -120,7 +121,7 @@ class StudentPage extends React.Component {
               parameters, then it was picked in email or other unrelated detail, like url
           */
           if(queryList.length < 1) {
-            alert("Unfortunately, your search yielded no results :( this runss ");
+            ToastsStore.error("Unfortunately, your search yielded no results :(");
             return;
           };
         }
@@ -140,15 +141,19 @@ class StudentPage extends React.Component {
     // Function to ensure that an updated version of the userData is passed
     async function getQueryResponse() {
       const queryData = await getRequest(input);
-      if(queryData.length < 1) {
-        alert("Unfortunately, your search yielded no results :( ");
+      if (queryData.error) {
+        ToastsStore.error(`An error occured: ${queryData.error}`);
+        return;
+      }
+       else if(queryData.length < 1) {
+        ToastsStore.error("Unfortunately, your search yielded no results :( ");
         return;
       }
       sortCourses(queryData);
     }
 
     if(searchInput === "") {
-      alert("Your search field is empty!");
+      ToastsStore.error("Your search field is empty!");
       return;
     }
     getQueryResponse();
@@ -165,7 +170,7 @@ class StudentPage extends React.Component {
         this.setState((prevState) => ({
           showDropdown: !prevState.showDropdown,
         }));
-      } else alert("You have not added any favorite course(s)")
+      } else ToastsStore.info("You have not added any favorite course(s)")
     }
 
     return (
@@ -194,6 +199,7 @@ class StudentPage extends React.Component {
 
     return(
       <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+        <ToastsContainer position={ToastsContainerPosition.TOP_LEFT} store={ToastsStore}/>
         <TopNav 
           navContainer={this.navContainer}
           handleSubmit={this.handleSubmit}
@@ -295,14 +301,14 @@ const SuggestionsContainer = (props) => {
       });
     }
 
-    changeRating = (_) => alert("You have to watch a video to set a rating or add to favorites");
+    changeRating = (_) => ToastsStore.error("You have to watch a video to set a rating or add to favorites");
 
     render() {
       const {course} = this.props;
       return(
         <div className="moviecard-container">
         <div className="course-image" onClick={this.handleClick}>
-          <img alt="cover poster" src={DefaultImage} />
+          <img style={{opacity: "0.8"}} alt="cover poster" src={course.cover_image} />
           <PlayIcon style={{position: "absolute"}} />
         </div>
         <div className="card-body">

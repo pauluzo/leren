@@ -184,6 +184,9 @@
   background-color: white;
   padding: 20px;
   padding-bottom: 0px;
+  border-radius: 20px;
+  min-width: 400px;
+  border: 2px dashed rgb(61, 15, 134);
 }
 
 .form-body {

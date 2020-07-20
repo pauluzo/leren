@@ -51,7 +51,7 @@ export function addUserVideo(userData, videoData, courseDetails) {
   newCourse["course_description"] = courseDetails.description;
   newCourse["category"] = courseDetails.category;
   newCourse["link"] = videoData.url;
-  newCourse["thumbnail"] = videoData.thumbnail_url;
+  newCourse["cover_image"] = courseDetails.coverImage;
   newCourse["rating"] = 0;
   newCourse["favorites"] = 0;
   newCourse["id"] = videoData.signature;
