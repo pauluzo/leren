@@ -92,11 +92,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  background-color: rgb(50, 68, 102);
 }
 
 .header-details {
   padding: 10px;
-  color: white;
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
@@ -105,11 +106,11 @@
 }
 
 .header-details h1 {
-  font-size: 3em;
+  font-size: 5em;
 }
 
 .header-details h4 {
-  font-size: 1.2rem;
+  font-size: 2em;
   max-width: 700px;
   line-height: 2em;
 }
@@ -238,6 +239,24 @@
 @media (max-width: 400px) {
   .search-input {
     width: 200px;
+  }
+}
+
+@media (max-width: 700px) {
+  .header {
+    background-image: url();
+  }
+
+  .header-details {
+    margin: 0px;
+  }
+
+  .header-details h1 {
+    font-size: 3em;
+  }
+
+  .header-details h4 {
+    font-size: 1.5em;
   }
 }
 

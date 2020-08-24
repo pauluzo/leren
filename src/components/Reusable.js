@@ -199,7 +199,7 @@ const ListTile = (data, index, deleteFunction) => {
         <div>Rating</div>
         {(data.rating === 0) ? "N/A" : data.rating}
       </div>
-      {deleteFunction && <div className="btn-container"> <CloseButton style={style} onClick={() => deleteFunction(index)} index={index} /> </div>}
+      {deleteFunction && <div className="btn-container"> <CloseButton style={style} onClick={() => deleteFunction(index, data)} index={index} /> </div>}
     </div>
   );
 }

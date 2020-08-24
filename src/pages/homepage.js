@@ -53,8 +53,8 @@ class HomePage extends React.Component {
         />
         <div className="header">
           <div className="header-details">
-            <h1 style={{fontSize: "5em"}}>Accelerate your career!</h1>
-            <h4 style={{fontSize: "2em"}}>
+            <h1>Accelerate your career!</h1>
+            <h4>
               Gain access to online courses, instructors, certificates and degrees from world-class tutors and organisations.
             </h4>
             <button className="col-btn" 
@@ -182,11 +182,15 @@ const BackDrop = props => {
       function getUserData () {
         createUser(userData, isInstructor)
         .then((data) => {
+          if(data.error) {
+            ToastsStore.error(data.error);
+            return;
+          }
           localStorage.setItem("userData", JSON.stringify(data));
           if(history) history.push("/profile", `${profile}`);
         })
         .catch((error) => {
-          ToastsStore.error("This user already exist.");
+          ToastsStore.error("An error occured! Try again, later");
         })
       }
       getUserData();

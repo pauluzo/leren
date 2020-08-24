@@ -25,7 +25,6 @@ export async function fetchPhotos(imageTag, setter) {
   .then(res => res.text())
   .then(text => text ? setter(JSON.parse(text).resources.map(image => image.publicId)) : [])
   .catch(err => {
-    console.log(err);
     alert("The image/video could not be fetched");
   });
 }
@@ -50,7 +49,6 @@ export function beginUpload (tag, callback, userData, videoDetails) {
         callback(callbackData);
       }
     } else {
-      console.log(error);
       callbackData = {error: error};
       callback(callbackData);
     }

@@ -1,6 +1,6 @@
 import React from 'react';
 import {beginUpload} from "../services/CloudinaryService";
-import {putRequest, getRequest} from "../services/JsonService";
+import {deleteRequest} from "../services/JsonService";
 import {TopNav, Dropdown, Footer} from "../components/Reusable";
 import {ReactComponent as CourseIcon1} from "../assets/icons/course1-icon.svg";
 import {ReactComponent as CourseIcon2} from "../assets/icons/course2-icon.svg";
@@ -49,7 +49,7 @@ class InstructorPage extends React.Component {
     const fetchCourses = () => {
       let storageResponse = localStorage.getItem("userData");
       let userData = JSON.parse(storageResponse);
-      let courses = userData.instructor.courses;
+      let courses = userData.courses;
       if(courses && courses.length > 0) {
         this.setState((prevState) => ({
           myCourses: courses,
@@ -73,37 +73,22 @@ class InstructorPage extends React.Component {
     this.setState({myCourses: courses})
     let storageResponse = localStorage.getItem("userData");
     let userData = JSON.parse(storageResponse);
-    userData.instructor.courses = courses;
-    putRequest(userData.id, userData)
+    // change to delete request and append underscore to id
+    deleteRequest(userData._id, deletedCourse[0]._id)
     .then((resp) => {
-      localStorage.setItem("userData", JSON.stringify(resp));
-      ToastsStore.success("Update has been saved successfully!");
+      if(!resp.error) {
+        localStorage.setItem("userData", JSON.stringify(resp));
+        ToastsStore.success("Course has been deleted successfully!");
+      }
     });
-    getRequest("abcdef00011111ghij")
-    .then((resp) => {
-      let response = resp[0];
-      let suggestCourses = response.suggestion_courses;
-      suggestCourses.forEach((course, index) => {
-        if(course.id === deletedCourse[0].id) {
-          suggestCourses.splice(index, 1);
-          response.suggestion_courses = suggestCourses;
-          putRequest("abcdef00011111ghij", response)
-          .then((_) => {return;})
-          .catch("Could not update successfully. Check your network connection");
-          return;
-        }
-      })
-    })
   }
 
   handleImageUpload = () => {
     beginUpload("images", (response) => {
-      console.log(response);
       if(response.error) ToastsStore.error(`Could not upload image successfully. Error: ${response.error}`);
       else if (response.info) {
         ToastsStore.success("Cover image was uploaded successfully");
         this.setState({isImageUploaded: true, coverImage: response.info.url});
-        console.log(response.info);
       }
     })
   }
