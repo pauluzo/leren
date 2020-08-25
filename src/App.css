@@ -60,11 +60,11 @@
 }
 
 .dropdown-container {
-  margin-top: 3.6rem;
+  margin-top: 3.7rem;
   background-color: white;
   color: black;
   width: 60%;
-  min-width: 400px;
+  min-width: 350px;
   max-width: 600px;
   max-height: 400px;
   min-height: 200px;
